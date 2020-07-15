@@ -1,0 +1,10 @@
+{
+  "name": "bridge_mirim",
+  "version": "1.0.0",
+  "description": "G-Bridge Project - MirimMediaLab",
+  "main": "index.js",
+  "author": "Park Sang Jin & Jang Hee Joo",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
