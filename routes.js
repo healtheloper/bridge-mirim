@@ -17,6 +17,8 @@ const CHANGE_PASSWORD = "/change-password";
 const VIDEOS = "/videos";
 const UPLOAD = "/upload";
 const VIDEO_DETAIL = "/:id";
+const EDIT_VIDEO = "/:id/edit";
+const DELETE_VIDEO = "/:id/delete";
 
 // Question Board
 
@@ -48,6 +50,20 @@ const routes = {
       return VIDEO_DETAIL;
     }
   },
+  editVideo: (id) => {
+    if (id) {
+      return `/videos/${id}/edit`;
+    } else {
+      return EDIT_VIDEO;
+    }
+  },
+  deleteVideo: (id) => {
+    if (id) {
+      return `/videos/${id}/delete`;
+    } else {
+      return DELETE_VIDEO;
+    }
+  },
   questions: QUESTIONS,
   questionDetail: (id) => {
     if (id) {
@@ -55,7 +71,9 @@ const routes = {
     } else {
       return QUESTION_DETAIL;
     }
-  },
+  }
 };
 
 export default routes;
+
+

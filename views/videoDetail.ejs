@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<%- include("./partials/header.ejs") %>
+<div class="video__player">
+    <video src="/<%= video.fileUrl %>"></video>
+</div>
+<div class="video__info">
+    <a href=<%= routes.editVideo(video.id) %>> Edit Video</a>
+    <h5 class="video__title"><%= video.title %></h5>
+    <span class="video__views"><%= video.views %></span>
+    <p class="video__description"><%= video.description %></p>
+</div>
+<%- include("./partials/footer.ejs") %>

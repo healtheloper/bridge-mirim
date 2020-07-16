@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<%- include("./partials/header.ejs") %>
+<div class="form-container">
+    <form action="/videos<%= routes.upload %>" method="post" enctype="multipart/form-data">
+        <label for="file">Video File</label>
+        <input type="file" id="file" name="videoFile" , required=ture accept="video/*">
+        <input type="text" placeholder="Title" , name="title" , required=true>
+        <textarea name="description" , placeholder="Description"></textarea>
+        <input type="submit" value="Upload Video">
+    </form>
+</div>
+<%- include("./partials/footer.ejs") %>

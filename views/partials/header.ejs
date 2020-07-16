@@ -1,20 +1,51 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <title><%= siteName %></title>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-      crossorigin="anonymous"
-    ></script>
-  </head>
 
-  <body>
-    <h1>Header</h1>
-  </body>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title><%= pageTitle %> | <%= siteName %></title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css"
+    integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q" crossorigin="anonymous">
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <header class="header">
+    <div class="header__column">
+      <a href=<%= routes.home %> class="banner text-decoration-none"><i class="fas fa-pen-square"></i> HANKOOKSA </a>
+    </div>
+    <div class="header__column">
+      <form action=<%= routes.search %>, method="get">
+        <input type="text" , placeholder="Search by term" , name="term">
+      </form>
+    </div>
+    <div class="header__column">
+      <ul>
+        <% if (!user.isAuthenticated) {%>
+        <li>
+          <a href=<%= routes.join %>> Join </a>
+        </li>
+        <li>
+          <a href=<%= routes.login %>> Log In </a>
+        </li>
+        <%} else {%>
+        <li>
+          <a href="/videos<%= routes.upload %>"> Upload </a>
+        </li>
+        <li>
+          <a href=<%= routes.userDetail(user.id) %>> Profile </a>
+        </li>
+        <li>
+          <a href=<%= routes.logout %>> Log Out </a>
+        </li>
+        <%} %>
+      </ul>
+    </div>
+  </header>
+</body>
+
 </html>
