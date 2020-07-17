@@ -1,5 +1,6 @@
 import routes from "../routes";
 import { videoModel } from "../db";
+import fs from "fs";
 
 export const home = async (req, res) => {
   try {
@@ -53,7 +54,7 @@ export const getEditVideo = async (req, res) => {
   } = req;
   try {
     const video = await videoModel.findAll({ where: { id: id } });
-    res.render("editVideo", { pageTitle: `Edit ${video.title}`, video });
+    res.render("editVideo", { pageTitle: `Edit ${video[0].title}`, video: video[0] });
   } catch (error) {
     res.redirect(routes.home);
   }
@@ -74,10 +75,16 @@ export const postEditVideo = async (req, res) => {
 
 export const deleteVideo = async (req, res) => {
   const {
-    params: { id },
+    params: { id }
   } = req;
   try {
-    await videoModel.detroy({ where: { id: id } });
+    const video = await videoModel.findAll({ where: { id: id } });
+    fs.unlinkSync(video[0].fileUrl, (err) => {
+      if (err) console.log(err);
+      else console.log("-- Video Deleted --")
+    });
+
+    await videoModel.destroy({ where: { id: id } });
   } catch (error) {
     console.log(error);
   }

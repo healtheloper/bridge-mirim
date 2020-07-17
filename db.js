@@ -2,9 +2,10 @@ import { Sequelize, Model, DataTypes } from "sequelize";
 import dotenv from "dotenv";
 dotenv.config();
 
-const sequelize = new Sequelize('mirim_bridge', "park", process.env.USER_PASSWORD, {
-    host: 'localhost',
-    dialect: 'mysql'
+const sequelize = new Sequelize('mirimLab', "root", process.env.USER_PASSWORD, {
+    host: '34.71.189.196',
+    dialect: 'mysql',
+    logging: false
 });
 
 
