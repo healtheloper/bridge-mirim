@@ -18,7 +18,7 @@
             <div class="posts">
                 <% questions.forEach(function (question, index) { %>
                 <div class="post">
-                    <a href="">
+                    <a href=<%= routes.questionDetail(question.id) %>>
                         <span class="post__id"><%= question.id %></span>
                         <span class="post__title"><%= question.title %></span>
                         <span class="post__userId"><%= question.userId %></span>

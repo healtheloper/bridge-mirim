@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<%- include("./partials/header.ejs") %>
+<div class="question__title">
+    <h2>Question : <%= question.title %></h2>
+    <span>Name : <%= question.userId %> ,</span>
+    <span>CreateAt : <%= question.createdAt %></span>
+    <a href=<%= routes.editQuestion(question.id) %>> Edit Question </a>
+    <a href=<%= routes.deleteQuestion(question.id) %>> Delete Question </a>
+</div>
+
+<hr>
+<div class="question__description">
+    <span><%= question.description %></span>
+</div>
+
+<%- include("./partials/footer.ejs") %>

@@ -21,7 +21,10 @@ const EDIT_VIDEO = "/:id/edit";
 const DELETE_VIDEO = "/:id/delete";
 
 // Videos - Posts
-const QUESTION = "/:id/question";
+const QUESTION = "/question";
+const QUESTION_DETAIL = "/:id";
+const EDIT_QUESTION = "/:id/edit";
+const DELETE_QUESTION = "/:id/delete";
 ////
 
 const routes = {
@@ -46,7 +49,7 @@ const routes = {
     if (id) {
       return `/videos/${id}/question`;
     } else {
-      return QUESTION;
+      return `/videos/${id}`;
     }
   },
   videoDetail: (id) => {
@@ -69,7 +72,29 @@ const routes = {
     } else {
       return DELETE_VIDEO;
     }
-  }
+  },
+  question: QUESTION,
+  questionDetail: (id) => {
+    if (id) {
+      return `/question/${id}`;
+    } else {
+      return QUESTION_DETAIL;
+    }
+  },
+  editQuestion: (id) => {
+    if (id) {
+      return `/question/${id}/edit`;
+    } else {
+      return EDIT_QUESTION;
+    }
+  },
+  deleteQuestion: (id) => {
+    if (id) {
+      return `/question/${id}/delete`;
+    } else {
+      return DELETE_QUESTION;
+    }
+  },
 };
 
 export default routes;

@@ -7,6 +7,7 @@ import { localsMiddleware } from "./middlewares";
 import globalRouter from "./routers/globalRouter";
 import videoRouter from "./routers/videoRouter";
 import userRouter from "./routers/userRouter";
+import questionRouter from "./routers/questionRouter";
 import routes from "./routes";
 const app = express();
 
@@ -23,5 +24,6 @@ app.use(localsMiddleware);
 app.use(routes.home, globalRouter);
 app.use(routes.users, userRouter);
 app.use(routes.videos, videoRouter);
+app.use(routes.question, questionRouter);
 
 export default app;

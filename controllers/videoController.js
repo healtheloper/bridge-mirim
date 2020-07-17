@@ -12,10 +12,11 @@ export const home = async (req, res) => {
   }
 };
 
-export const search = (req, res) => {
+export const search = async (req, res) => {
   const {
     query: { term: searchingBy },
   } = req;
+  const videos = await videoModel.findAll();
   res.render("search", { pageTitle: "Search", searchingBy, videos });
 };
 
@@ -94,7 +95,7 @@ export const deleteVideo = async (req, res) => {
   res.redirect(routes.home);
 };
 
-export const getQuestion = async (req, res) => {
+export const getUploadQuestion = async (req, res) => {
   const {
     params: { id },
   } = req;
@@ -106,12 +107,11 @@ export const getQuestion = async (req, res) => {
   }
 }
 
-export const postQuestion = async (req, res) => {
+export const postUploadQuestion = async (req, res) => {
   const {
     params: { id },
     body: { title, description, userId }
   } = req;
-  console.log(req.body);
   const newQuestion = await questionModel.create({
     videoId: id,
     userId,

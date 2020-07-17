@@ -2,33 +2,49 @@
 
 Bridge Summer Semester Project - Mirim Media Lab 
 
-@healtheloper(https://github.com/healtheloper) Park Sang Jin
-@jang-huiju(https://github.com/jang-huiju) Jang Hee Joo
+[@healtheloper](https://github.com/healtheloper) Park Sang Jin
+[@jang-huiju](https://github.com/jang-huiju) Jang Hee Joo
 
-## User Function
+## Common
+
+### User Function
+**when isAuthenticated = false**
 - [ ] Log in
 - [ ] Join
+
+**when isAuthenticated = true**
 - [ ] Data Update
+- Avatar Update
+- Name Update
+
 - [ ] Avatar img
-- [ ] Avatar Update
-  
-## Question Board
+- [ ] Name
+
+### Question Board
 - [x] Create post
-- [ ] Destroy
-- [ ] Update
+- [x] Destroy
+- [x] Update
 - [ ] Comments
 
-## Video Function
+### Video Function
+- [x] Video Detail : Note, Question Board
+
+### Quiz Function
+- [ ] Answer Check
+
+## Teacher(admin)
+
+### User Function
+### _header
+- [x] Video Upload
+
+### Video Function
 - [x] Create
 - [x] Update 
 - [x] Delete 
-- [x] Video Detail : Note, Question Board
-  
-## Quiz Function
+### Quiz Function
 - [ ] Create
 - [ ] Update
 - [ ] Delete
-- [ ] Answer Check
-
-### Interface
+## Interface
 - [ ] DONE ????
