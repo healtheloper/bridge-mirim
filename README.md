@@ -20,8 +20,8 @@ Bridge Summer Semester Project - Mirim Media Lab
 
 ## Video Function
 - [x] Create
-- [ ] Update - ing - park
-- [ ] Delete - ing - park
+- [x] Update 
+- [x] Delete 
 - [ ] Video Detail : Note, Question Board - ing - park
 
 ## Quiz Function
