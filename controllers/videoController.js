@@ -1,5 +1,5 @@
 import routes from "../routes";
-import { videoModel } from "../db";
+import { videoModel, questionModel } from "../db";
 import fs from "fs";
 
 export const home = async (req, res) => {
@@ -41,9 +41,11 @@ export const videoDetail = async (req, res) => {
   } = req;
   try {
     const video = await videoModel.findAll({ where: { id: id } });
-    res.render("videoDetail", { pageTitle: video[0].title, video: video[0] });
+    const questions = await questionModel.findAll({ where: { videoId: id } });
+    res.render("videoDetail", { pageTitle: video[0].title, video: video[0], questions });
 
   } catch (error) {
+    console.log(error);
     res.redirect(routes.home);
   }
 };
@@ -85,9 +87,36 @@ export const deleteVideo = async (req, res) => {
     });
 
     await videoModel.destroy({ where: { id: id } });
+    await questionModel.destroy({ where: { videoId: id } });
   } catch (error) {
     console.log(error);
   }
   res.redirect(routes.home);
 };
 
+export const getQuestion = async (req, res) => {
+  const {
+    params: { id },
+  } = req;
+  try {
+    const video = await videoModel.findAll({ where: { id: id } });
+    res.render("uploadQues", { pageTitle: `Question Upload ${video[0].title}`, video: video[0] });
+  } catch (error) {
+    res.redirect(routes.home);
+  }
+}
+
+export const postQuestion = async (req, res) => {
+  const {
+    params: { id },
+    body: { title, description, userId }
+  } = req;
+  console.log(req.body);
+  const newQuestion = await questionModel.create({
+    videoId: id,
+    userId,
+    title,
+    description
+  });
+  res.redirect(routes.videoDetail(newQuestion.videoId));
+}

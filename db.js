@@ -11,19 +11,32 @@ const sequelize = new Sequelize('mirimLab', "root", process.env.USER_PASSWORD, {
 
 export const videoModel = sequelize.define("Video", {
     fileUrl: {
-        type: Sequelize.STRING,
-        required: "File URL is required",
+        type: Sequelize.STRING
     },
     title: {
-        type: Sequelize.STRING,
-        required: "Title is required",
+        type: Sequelize.STRING
+    },
+    description: Sequelize.STRING,
+    views: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+    }
+});
+
+export const questionModel = sequelize.define("Question", {
+    videoId: {
+        type: Sequelize.STRING
+    },
+    userId: Sequelize.TEXT,
+    title: {
+        type: Sequelize.STRING
     },
     description: Sequelize.STRING,
     views: {
         type: Sequelize.INTEGER,
         defaultValue: 0,
     },
-    comments: Sequelize.TEXT
+
 });
 
 const handleOpen = () => console.log("✅ Connected to DB");

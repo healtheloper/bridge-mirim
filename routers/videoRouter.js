@@ -8,6 +8,8 @@ import {
   getEditVideo,
   postEditVideo,
   deleteVideo,
+  getQuestion,
+  postQuestion
 } from "../controllers/videoController";
 import { uploadVideo } from "../middlewares";
 
@@ -26,5 +28,9 @@ videoRouter.post(routes.editVideo(), postEditVideo);
 
 // 비디오 삭제
 videoRouter.get(routes.deleteVideo(), deleteVideo);
+
+// 질문게시글 게시
+videoRouter.get(routes.uploadQuestion(), getQuestion);
+videoRouter.post(routes.uploadQuestion(), postQuestion);
 
 export default videoRouter;

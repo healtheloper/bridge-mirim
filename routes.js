@@ -20,10 +20,9 @@ const VIDEO_DETAIL = "/:id";
 const EDIT_VIDEO = "/:id/edit";
 const DELETE_VIDEO = "/:id/delete";
 
-// Question Board
-
-const QUESTIONS = "/questions";
-const QUESTION_DETAIL = "/:id";
+// Videos - Posts
+const QUESTION = "/:id/question";
+////
 
 const routes = {
   home: HOME,
@@ -43,6 +42,13 @@ const routes = {
   changePassword: CHANGE_PASSWORD,
   videos: VIDEOS,
   upload: UPLOAD,
+  uploadQuestion: (id) => {
+    if (id) {
+      return `/videos/${id}/question`;
+    } else {
+      return QUESTION;
+    }
+  },
   videoDetail: (id) => {
     if (id) {
       return `/videos/${id}`;
@@ -62,14 +68,6 @@ const routes = {
       return `/videos/${id}/delete`;
     } else {
       return DELETE_VIDEO;
-    }
-  },
-  questions: QUESTIONS,
-  questionDetail: (id) => {
-    if (id) {
-      return `/videos/questions/${id}`;
-    } else {
-      return QUESTION_DETAIL;
     }
   }
 };

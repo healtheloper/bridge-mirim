@@ -2,8 +2,8 @@
 
 Bridge Summer Semester Project - Mirim Media Lab 
 
-@healtheloper Park Sang Jin
-@ Jang Hee Joo
+@healtheloper(https://github.com/healtheloper) Park Sang Jin
+@jang-huiju(https://github.com/jang-huiju) Jang Hee Joo
 
 ## User Function
 - [ ] Log in
@@ -13,7 +13,7 @@ Bridge Summer Semester Project - Mirim Media Lab
 - [ ] Avatar Update
   
 ## Question Board
-- [ ] Create post
+- [x] Create post
 - [ ] Destroy
 - [ ] Update
 - [ ] Comments
@@ -22,8 +22,8 @@ Bridge Summer Semester Project - Mirim Media Lab
 - [x] Create
 - [x] Update 
 - [x] Delete 
-- [ ] Video Detail : Note, Question Board - ing - park
-
+- [x] Video Detail : Note, Question Board
+  
 ## Quiz Function
 - [ ] Create
 - [ ] Update

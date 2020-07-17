@@ -1,12 +1,57 @@
 <!DOCTYPE html>
 <%- include("./partials/header.ejs") %>
 <div class="video__player">
-    <video src="/<%= video.fileUrl %>"></video>
+    <video src="/<%= video.fileUrl %>" , controls=true></video>
 </div>
 <div class="video__info">
     <a href=<%= routes.editVideo(video.id) %>> Edit Video</a>
     <h5 class="video__title"><%= video.title %></h5>
-    <span class="video__views"><%= video.views %></span>
-    <p class="video__description"><%= video.description %></p>
+    <span class="video__views">views : <%= video.views %></span>
+    <div class="video__detailBox">
+        <h1 class="video__note" style="color:blue;">강의노트</h1>
+        <h1 class="video__question">질문</h1>
+        <p class="video__description"><%= video.description %></p>
+        <div class="video__questions" style="display:none;">
+            <div class="posts__upload">
+                <a href=<%= routes.uploadQuestion(video.id) %>> 질문하기 </a>
+            </div>
+            <div class="posts">
+                <% questions.forEach(function (question, index) { %>
+                <div class="post">
+                    <a href="">
+                        <span class="post__id"><%= question.id %></span>
+                        <span class="post__title"><%= question.title %></span>
+                        <span class="post__userId"><%= question.userId %></span>
+                        <span class="post__views"><%= question.views %></span>
+                        <span class="post__date"><%= question.createdAt %></span>
+                    </a>
+                </div>
+                <% }); %>
+            </div>
+
+        </div>
+    </div>
 </div>
+<script>
+    const note = document.querySelector(".video__note");
+    const question = document.querySelector(".video__question");
+    const description = document.querySelector(".video__description");
+    const questions = document.querySelector(".video__questions");
+
+    const handleNoteClick = () => {
+        note.style.color = "blue";
+        question.style.color = "black";
+        questions.style.display = "none";
+        description.style.display = "block";
+    }
+    const handleQuestionClick = () => {
+        question.style.color = "blue";
+        note.style.color = "black";
+        description.style.display = "none";
+        questions.style.display = "block";
+    }
+    note.addEventListener("click", handleNoteClick);
+    question.addEventListener("click", handleQuestionClick);
+
+</script>
 <%- include("./partials/footer.ejs") %>
