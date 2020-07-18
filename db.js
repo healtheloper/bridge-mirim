@@ -36,7 +36,14 @@ export const questionModel = sequelize.define("Question", {
         type: Sequelize.INTEGER,
         defaultValue: 0,
     },
+});
 
+export const commentModel = sequelize.define("Comment", {
+    questionId: {
+        type: Sequelize.STRING
+    },
+    userId: Sequelize.TEXT,
+    comment: Sequelize.STRING
 });
 
 const handleOpen = () => console.log("✅ Connected to DB");

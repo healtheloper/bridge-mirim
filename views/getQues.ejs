@@ -13,4 +13,25 @@
     <span><%= question.description %></span>
 </div>
 
+<div class="form-container">
+    <form action=<%= routes.uploadComment(question.id) %> method="post">
+        <!-- TODO: User Parsing-->
+        <img src="#" alt="Avater" width="100px" height="100px">
+        <span>Login user</span>
+        <input type="text" placeholder="comment here" name="comment" required=true>
+        <input type="submit" value="Upload comment">
+    </form>
+</div>
+<hr>
+<% comments.forEach(function (comment, index) { %>
+
+<img src="#" alt="Avater" width="100px" height="100px">
+<!-- TODO: User Parsing-->
+<span>Login user</span>
+<span><%= comment.comment %></span>
+<span><%= comment.createdAt %></span>
+<a href=<%= routes.deleteComment(comment.id) %> class="comment__delete"> Delete Comment </a>
+<hr>
+<% }); %>
+
 <%- include("./partials/footer.ejs") %>

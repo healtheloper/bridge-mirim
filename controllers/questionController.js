@@ -1,5 +1,5 @@
 import routes from "../routes";
-import { videoModel, questionModel } from "../db";
+import { videoModel, questionModel, commentModel } from "../db";
 
 export const getQuestion = async (req, res) => {
     const {
@@ -7,10 +7,11 @@ export const getQuestion = async (req, res) => {
     } = req;
     try {
         const question = await questionModel.findAll({ where: { id: id } });
-        res.render("getQues", { pageTitle: "Question", question: question[0] });
+        const comments = await commentModel.findAll({ where: { questionId: question[0].id } })
+        res.render("getQues", { pageTitle: "Question", question: question[0], comments });
     } catch (error) {
         console.log(error);
-        res.redirect(routes.home);
+        res.render("getQues", { pageTitle: "Question", question: [], comments: [] });
     }
 }
 
@@ -51,3 +52,30 @@ export const deleteQuestion = async (req, res) => {
     }
     res.redirect(routes.home);
 };
+
+export const uploadComment = async (req, res) => {
+    const {
+        params: { id },
+        body: { comment, userId }
+    } = req;
+    const newComment = await commentModel.create({
+        questionId: id,
+        userId,
+        comment
+    });
+    res.redirect(routes.questionDetail(newComment.questionId));
+};
+
+export const deleteComment = async (req, res) => {
+    const {
+        params: { id }
+    } = req;
+    try {
+        const comment = await commentModel.findAll({ where: { id: id } });
+        await commentModel.destroy({ where: { id: id } });
+        res.redirect('back');
+    } catch (error) {
+        console.log(error);
+        res.redirect(routes.home);
+    }
+}

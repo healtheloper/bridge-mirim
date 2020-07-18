@@ -26,6 +26,12 @@ const QUESTION = "/question";
 const QUESTION_DETAIL = "/:id";
 const EDIT_QUESTION = "/:id/edit";
 const DELETE_QUESTION = "/:id/delete";
+const UPLOAD_COMMENT = "/:id/comment";
+const DELETE_COMMENT = "/:id/comment/delete";
+
+// Comment
+
+
 ////
 
 const routes = {
@@ -46,6 +52,13 @@ const routes = {
   changePassword: CHANGE_PASSWORD,
   videos: VIDEOS,
   upload: UPLOAD,
+  uploadComment: (id) => {
+    if (id) {
+      return `/question/${id}/comment`;
+    } else {
+      return UPLOAD_COMMENT;
+    }
+  },
   uploadQuestion: (id) => {
     if (id) {
       return `/videos/${id}/question`;
@@ -65,6 +78,13 @@ const routes = {
       return `/videos/${id}/edit`;
     } else {
       return EDIT_VIDEO;
+    }
+  },
+  deleteComment: (id) => {
+    if (id) {
+      return `/question/${id}/comment/delete`;
+    } else {
+      return DELETE_COMMENT;
     }
   },
   deleteVideo: (id) => {
