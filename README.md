@@ -24,7 +24,7 @@ Bridge Summer Semester Project - Mirim Media Lab
 - [x] Create post
 - [x] Destroy
 - [x] Update
-- [ ] Comments
+- [x] Comments
 
 ### Video Function
 - [x] Video Detail : Note, Question Board
