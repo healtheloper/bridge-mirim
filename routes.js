@@ -19,6 +19,7 @@ const UPLOAD = "/upload";
 const VIDEO_DETAIL = "/:id";
 const EDIT_VIDEO = "/:id/edit";
 const DELETE_VIDEO = "/:id/delete";
+const VIDEO_QUESTION = "/:id/question";
 
 // Videos - Posts
 const QUESTION = "/question";
@@ -49,7 +50,7 @@ const routes = {
     if (id) {
       return `/videos/${id}/question`;
     } else {
-      return `/videos/${id}`;
+      return VIDEO_QUESTION;
     }
   },
   videoDetail: (id) => {

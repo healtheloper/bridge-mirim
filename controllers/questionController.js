@@ -5,7 +5,6 @@ export const getQuestion = async (req, res) => {
     const {
         params: { id },
     } = req;
-    console.log(id);
     try {
         const question = await questionModel.findAll({ where: { id: id } });
         res.render("getQues", { pageTitle: "Question", question: question[0] });
