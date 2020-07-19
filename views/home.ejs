@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <%- include("./partials/header.ejs") %>
-
 <div class="video__main">
     <% videos.forEach(function (video, index) { %>
     <video class="video__thumbnail" src="/<%= video.fileUrl %>" controls=true> </video>
