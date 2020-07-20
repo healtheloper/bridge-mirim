@@ -9,6 +9,7 @@ import videoRouter from "./routers/videoRouter";
 import userRouter from "./routers/userRouter";
 import questionRouter from "./routers/questionRouter";
 import routes from "./routes";
+const session=require('express-session');
 const app = express();
 
 app.use(helmet());
@@ -20,6 +21,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 app.use(express.static(__dirname+'/'));
 app.use(localsMiddleware);
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true
+}));
 
 app.use(routes.home, globalRouter);
 app.use(routes.users, userRouter);
