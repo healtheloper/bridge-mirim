@@ -1,24 +1,36 @@
 import routes from "../routes";
-
+import { UserModel } from "../db";
+const session=require('express-session');
 export const getJoin = (req, res) => {
   res.render("join", { pageTitle: "Join" });
 };
 
-export const postJoin = (req, res) => {
+export const postJoin = async (req, res) => {
   const {
-    body: { name, email, password, password2 },
+    body: { email, password, password2, name },
   } = req;
+  try{
   if (password !== password2) {
     res.status(400);
     res.render("join", { pageTitle: "Join" });
   } else {
     // To Do: Register User
+    await UserModel.create({
+      email,
+      password,
+      password2,
+      name
+    });
     // To Do: Log user in
-    res.redirect(routes.home);
+    res.redirect(routes.login);
   }
+}catch(error){
+  console.log(error);
+  res.redirect(routes.home);
+}
+
 };
 
-export const getLogin = (req, res) =>
   res.render("login", { pageTitle: "Log In" });
 export const postLogin = (req, res) => {
   res.redirect(routes.home);
@@ -26,7 +38,14 @@ export const postLogin = (req, res) => {
 
 export const logout = (req, res) => {
   // To Do: Process Log Out
-  res.redirect(routes.home);
+  req.session.destroy(function(error){
+    if(error){
+       console.log(error);
+    }else{
+        res.redirect(routes.home);
+    }
+  
+});
 };
 
 export const userDetail = (req, res) =>
