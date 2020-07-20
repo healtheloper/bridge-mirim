@@ -2,7 +2,7 @@
 <%- include("./partials/header.ejs") %>
 <h5 class="video__title"><%= video.title %></h5>
 <div align="center" class="video__player">
-    <video src="/<%= video.fileUrl %>" , controls=true></video>
+    <video src="/<%= video.fileUrl %>" , style="width:1000px;" controls=true></video>
 </div>
 <div align="right" class="video__info">
     <div><a href=<%= routes.editVideo(video.id) %>> Edit Video</a></div>
