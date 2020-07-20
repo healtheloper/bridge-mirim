@@ -1,4 +1,56 @@
 <!DOCTYPE html>
 <%- include("./partials/header.ejs") %>
 <h2>editProfile</h2>
+
+    <script language="javascript">
+      function validate() {
+        let pw1 = document.getElementById("pw1").value;
+        let pw2 = document.getElementById("pw2").value;
+        let uid = document.getElementById("uid").value;
+
+        if (pw1 != pw2) {
+          alert("암호가 서로 다릅니다. 다시입력하세요");
+          return false;
+        }
+        return true;
+      }
+    </script>
+
+    <p>
+    <div class="container">  <!-- container class 가 페이지의 컨텐츠영역을 지정 -->
+    <div class="jumbotron" style="width:500px; margin:auto">
+
+    <div class="bm-login-form" style='width:400px; margin-left:auto; margin-right:auto; border:1px'>
+
+      <div class="starter-template">
+        <h5> Join update</h5> <hr>
+      </div>
+
+     <form name=join onsubmit="return validate()" method=post action="/users/up_info">
+       <div class="form-group">
+         <label for="exampleInputEmail1">UserId</label>
+         <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" value="">
+       </div>
+       <div class="form-group">
+         <label for="exampleInputPassword1">Password</label>
+         <input type="password" class="form-control" name="password" id="password" value="">
+       </div>
+       <div class="form-group">
+         <label for="exampleInputPassword2">Password one more</label>
+         <input type="password" class="form-control" name="password2" id="password2"value="">
+       </div>
+       <div class="form-group">
+         <label for="exampleInputEmail1">UserName</label>
+         <input type="text" class="form-control" name="name" id="name" value="">
+       </div>
+       
+         <hr>
+         <button type="submit" class="btn btn-primary">Join</button>
+      </form>
+     </div>
+     </div>
+    </div><!-- /.container -->
+
+ <!-- Footer 영역 -->
+ 
 <%- include("./partials/footer.ejs") %>
