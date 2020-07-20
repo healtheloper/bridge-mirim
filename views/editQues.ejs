@@ -4,7 +4,7 @@
     <form action=<%= routes.editQuestion(question.id) %> method="post">
         <input type="text" placeholder="Title" name="title" value=<%= question.title %> required=true>
         <textarea name="description" placeholder="Description"><%= question.description %></textarea>
-        <input type="submit" value="Update Question">
+        <div align="center"><input class="btn btn-primary" type="submit" value="Update Question"></div>
     </form>
 </div>
 <%- include("./partials/footer.ejs") %>

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <%- include("./partials/header.ejs") %>
-<div class="form-container">
+<div class="container">
     <form action=<%= routes.editVideo(video.id) %> method="post">
         <input type="text" laceholder="Title" name="title" value=<%= video.title %>>
         <textarea name="description" placeholder="Description"><%= video.description %></textarea>
-        <input type="submit" value="Update Video">
+        <div align="center"><input class="btn btn-primary" type="submit" value="Update Video"></div>
     </form>
 </div>
 

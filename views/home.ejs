@@ -2,13 +2,14 @@
 <%- include("./partials/header.ejs") %>
 <div class="video__main">
     <% videos.forEach(function (video, index) { %>
-    <video class="video__thumbnail" src="/<%= video.fileUrl %>" controls=true> </video>
-    <a href=<%= routes.videoDetail(video.id) %>>
-        <h4 class="video__title"><%= video.title %></h4>
-        <h6 class="video__views">Views : <%= video.views %></h6>
+    <div align="center"><video class="video__thumbnail" src="/<%= video.fileUrl %>" controls=true> </video></div>
+    <div><a href=<%= routes.videoDetail(video.id) %>></div>
+        <div><h5 class="video__title"><%= video.title %></h5></div>
+        <div align="right"><h6 class="video__views">Views : <%= video.views %></h6>
     </a>
     <a href=<%= routes.deleteVideo(video.id) %> class="video__delete"> Delete Video </a>
+</div>
     <hr>
     <% }); %>
-</div>
+
 <%- include("./partials/footer.ejs") %>

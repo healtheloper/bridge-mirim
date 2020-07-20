@@ -30,8 +30,10 @@ export const postJoin = async (req, res) => {
 }
 
 };
-
+export const getLogin=(req,res)=>{
   res.render("login", { pageTitle: "Log In" });
+};
+ 
 export const postLogin = (req, res) => {
   res.redirect(routes.home);
 };
