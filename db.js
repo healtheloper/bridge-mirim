@@ -46,6 +46,13 @@ export const commentModel = sequelize.define("Comment", {
     comment: Sequelize.STRING
 });
 
+export const UserModel = sequelize.define("USERS",{
+    email : Sequelize.STRING,
+    password: Sequelize.STRING,
+    password2: Sequelize.STRING,
+    name : Sequelize.STRING
+});
+
 const handleOpen = () => console.log("✅ Connected to DB");
 const handleError = (error) => console.log(`❌ Error on DB Connection : ${error}`)
 
