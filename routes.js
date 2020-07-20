@@ -26,11 +26,19 @@ const QUESTION = "/question";
 const QUESTION_DETAIL = "/:id";
 const EDIT_QUESTION = "/:id/edit";
 const DELETE_QUESTION = "/:id/delete";
-const UPLOAD_COMMENT = "/:id/comment";
-const DELETE_COMMENT = "/:id/comment/delete";
 
 // Comment
 
+const UPLOAD_COMMENT = "/:id/comment";
+const DELETE_COMMENT = "/:id/comment/delete";
+
+// Quiz
+
+const QUIZ = "/quiz";
+const UPLOAD_QUIZ = "/upload";
+const QUIZ_DETAIL = "/:id";
+const EDIT_QUIZ = "/:id/edit"
+const DELETE_QUIZ = "/:id/delete"
 
 ////
 
@@ -116,6 +124,24 @@ const routes = {
       return DELETE_QUESTION;
     }
   },
+  quiz: QUIZ,
+  uploadQuiz: UPLOAD_QUIZ,
+  QUIZ_DETAIL: QUIZ_DETAIL,
+  editQuiz: (id) => {
+    if (id) {
+      return `/quiz/${id}/edit`;
+    } else {
+      return EDIT_QUIZ;
+    }
+  },
+  deleteQuiz: (id) => {
+    if (id) {
+      return `/quiz/${id}/delete`;
+    } else {
+      return DELETE_QUIZ;
+    }
+  },
+
 };
 
 export default routes;

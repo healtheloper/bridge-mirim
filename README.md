@@ -30,7 +30,7 @@ Bridge Summer Semester Project - Mirim Media Lab
 - [x] Video Detail : Note, Question Board
 
 ### Quiz Function
-- [ ] Answer Check
+- [x] Answer Check
 
 ## Teacher(admin)
 
@@ -43,8 +43,8 @@ Bridge Summer Semester Project - Mirim Media Lab
 - [x] Update 
 - [x] Delete 
 ### Quiz Function
-- [ ] Create
-- [ ] Update
-- [ ] Delete
+- [x] Create
+- [x] Update
+- [x] Delete
 ## Interface
 - [ ] DONE ????

@@ -8,6 +8,7 @@ import globalRouter from "./routers/globalRouter";
 import videoRouter from "./routers/videoRouter";
 import userRouter from "./routers/userRouter";
 import questionRouter from "./routers/questionRouter";
+import quizRouter from "./routers/quizRouter";
 import routes from "./routes";
 const app = express();
 
@@ -18,11 +19,12 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("dev"));
-app.use(express.static(__dirname+'/'));
+app.use(express.static(__dirname + '/'));
 app.use(localsMiddleware);
 
 app.use(routes.home, globalRouter);
 app.use(routes.users, userRouter);
+app.use(routes.quiz, quizRouter);
 app.use(routes.videos, videoRouter);
 app.use(routes.question, questionRouter);
 

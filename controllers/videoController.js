@@ -1,14 +1,15 @@
 import routes from "../routes";
-import { videoModel, questionModel } from "../db";
+import { videoModel, questionModel, quizModel } from "../db";
 import fs from "fs";
 
 export const home = async (req, res) => {
   try {
-    const videos = await videoModel.findAll(); // DB에 있는 모든 video를 가져옴, await 부분이 끝나기 전 까지 render를 하지 않음, 에러가 생겨도 실행
-    res.render("home", { pageTitle: "Home", videos });
+    const videos = await videoModel.findAll();
+    const quizs = await quizModel.findAll();
+    res.render("home", { pageTitle: "Home", videos, quizs });
   } catch (error) {
     console.log(error);
-    res.render("home", { pageTitle: "Home", videos: [] });
+    res.render("home", { pageTitle: "Home", videos: [], quizs: [] });
   }
 };
 

@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <%- include("./partials/header.ejs") %>
+
 <body>
-<div class="container">
-    <form action="/videos<%= routes.upload %>" method="post" enctype="multipart/form-data">
-        <div class="form-group">
-        <label for="title" class="control-label">Title</label>
-        <input type="text" class="form-control" placeholder="Title" id="title" required=true>
-        </div>
-        <div class="form-group">
-        <textarea name="description" placeholder="Description"></textarea></div>
-        <div class="input-group">
+    <div class="container">
+        <form action="/videos<%= routes.upload %>" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="title" class="control-label">Title</label>
+                <input type="text" class="form-control" placeholder="Title" id="title" name="title" required=true>
+            </div>
+            <div class="form-group">
+                <textarea name="description" placeholder="Description"></textarea></div>
+            <div class="input-group">
                 <div class="input-group-prepend">
-                  <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                    <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
                 </div>
-       <input type="file" id="file" name="videoFile" required=ture accept="video/*">
-        </div>
+                <input type="file" id="file" name="videoFile" required=ture accept="video/*">
+            </div>
     </div>
     <div align="center">
         <button type="submit" class="btn btn-primary " value="Upload Video">upload</button>
-        </div>
+    </div>
     </form>
-<%- include("./partials/footer.ejs") %>
+    <%- include("./partials/footer.ejs") %>
 </body>

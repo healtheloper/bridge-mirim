@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<%- include("./partials/header.ejs") %>
+
+<body>
+    <div class="container">
+        <form action="/quiz<%= routes.uploadQuiz %>" method="post">
+            <div class="form-group">
+                <label for="title" class="control-label">Quiz Title</label>
+                <input type="text" class="form-control" placeholder="Title" id="question" name="question" required=true>
+            </div>
+            <div class="form-group">
+                <label for="answerOne" class="control-label">Quiz 1</label>
+                <input type="text" class="form-control" placeholder="Answer One" id="answerOne" name="answerOne"
+                    required=true>
+            </div>
+            <div class="form-group">
+                <label for="answerTwo" class="control-label">Quiz 2</label>
+                <input type="text" class="form-control" placeholder="Answer Two" id="answerTwo" name="answerTwo"
+                    required=true>
+            </div>
+            <div class="form-group">
+                <label for="answerThree" class="control-label">Quiz 3</label>
+                <input type="text" class="form-control" placeholder="Answer Three" id="answerThree" name="answerThree"
+                    required=true>
+            </div>
+            <div class="form-group">
+                <label for="answerFour" class="control-label">Quiz 4</label>
+                <input type="text" class="form-control" placeholder="Answer Four" id="answerFour" name="answerFour"
+                    required=true>
+            </div>
+            <div class="form-group">
+                <h5 class="text">What is Correct ? 🤔</h5>
+                <label for="answerCheckOne" class="control-label btn btn-info">
+                    <input type="radio" id="answerCheckOne" name="answerCheck" value="1">Quiz 1
+                </label>
+                <label for="answerCheckTwo" class="control-label btn btn-info">
+                    <input type="radio" id="answerCheckTwo" name="answerCheck" value="2">Quiz 2
+                </label>
+                <label for="answerCheckThree" class="control-label btn btn-info">
+                    <input type="radio" id="answerCheckThree" name="answerCheck" value="3">Quiz 3
+                </label>
+                <label for="answerCheckFour" class="control-label btn btn-info">
+                    <input type="radio" id="answerCheckFour" name="answerCheck" value="4">Quiz 4
+                </label>
+            </div>
+            <div align="center">
+                <button type="submit" class="btn btn-primary " value="Upload Quiz">upload</button>
+            </div>
+        </form>
+    </div>
+    <%- include("./partials/footer.ejs") %>
+</body>

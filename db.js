@@ -23,6 +23,20 @@ export const videoModel = sequelize.define("Video", {
     }
 });
 
+export const quizModel = sequelize.define("Quiz", {
+    question: {
+        type: Sequelize.STRING
+    },
+    answerOne: Sequelize.STRING,
+    answerTwo: Sequelize.STRING,
+    answerThree: Sequelize.STRING,
+    answerFour: Sequelize.STRING,
+    answerCheck: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+    }
+});
+
 export const questionModel = sequelize.define("Question", {
     videoId: {
         type: Sequelize.STRING
