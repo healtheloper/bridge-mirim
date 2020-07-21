@@ -17,6 +17,7 @@ export const videoModel = sequelize.define("Video", {
         type: Sequelize.STRING
     },
     description: Sequelize.STRING,
+    note: Sequelize.STRING(2000),
     views: {
         type: Sequelize.INTEGER,
         defaultValue: 0,
@@ -60,11 +61,11 @@ export const commentModel = sequelize.define("Comment", {
     comment: Sequelize.STRING
 });
 
-export const UserModel = sequelize.define("USERS",{
-    email : Sequelize.STRING,
+export const UserModel = sequelize.define("USERS", {
+    email: Sequelize.STRING,
     password: Sequelize.STRING,
     password2: Sequelize.STRING,
-    name : Sequelize.STRING
+    name: Sequelize.STRING
 });
 
 const handleOpen = () => console.log("✅ Connected to DB");

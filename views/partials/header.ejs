@@ -19,6 +19,8 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
     integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
     crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
+    integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
 </head>
 
 <body>
@@ -34,13 +36,15 @@
         </button>
         &nbsp;
         <div class="btn-group">
-          <a href=<%=routes.home %> class="btn btn-default navbar-btn dropdown-toggle"><i
-              class="glyphicon glyphicon-chevron-down"></i> <span class="hidden-xs"> HANKOOKSA </span></a>
+          <a href=<%=routes.home %> class="btn btn-default">
+            <span class="hidden-xs">
+              HANKOOKSA
+            </span>
+          </a>
         </div>
       </div>
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="navbar-collapse-1">
-
         <form action=<%=routes.search %> method="get" class="navbar-form navbar-left" role="search">
           <div class="form-group">
             <input type="text" class="form-control" placeholder="Search">
@@ -58,9 +62,7 @@
     <!-- Sidebar  -->
     <nav id="sidebar">
       <div class="sidebar-header">
-        <h3>본몬</h3>
-        <!-- --video 인증 안됨 -->
-
+        <h3>목록</h3>
       </div>
     </nav>
 
@@ -70,9 +72,9 @@
 
           <div class="container-fluid">
 
-            <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <button type="button" id="sidebarCollapse" class="btn btn-info shadow">
               <i class="fas fa-align-left"></i>
-              <span>sidebar</span>
+              <span>Side Bar</span>
             </button>
             <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
               data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -91,16 +93,16 @@
                 </li>
                 <%} else {%>
                 <li class="nav-item">
-                  <a class="nav-link" href="/quiz<%= routes.uploadQuiz %>"> Quiz Upload </a>
+                  <a class="nav-link btn m-2 text-info shadow" href="/quiz<%= routes.uploadQuiz %>"> Quiz Upload </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/videos<%= routes.upload %>"> Video Upload </a>
+                  <a class="nav-link btn m-2 text-info shadow" href="/videos<%= routes.upload %>"> Video Upload </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href=<%= routes.userDetail(user.id) %>> Profile </a>
+                  <a class="nav-link btn m-2 text-info shadow" href=<%= routes.userDetail(user.id) %>> Profile </a>
                 </li>
                 <li>
-                  <a class="nav-link" href=<%= routes.logout %>> Log Out </a>
+                  <a class="nav-link btn m-2 text-info shadow" href=<%= routes.logout %>> Log Out </a>
                 </li>
                 <%} %>
               </ul>
