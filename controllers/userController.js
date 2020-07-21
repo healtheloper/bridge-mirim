@@ -1,6 +1,7 @@
 import routes from "../routes";
 import { UserModel } from "../db";
 import session from "express-session";
+import ejs from "ejs";
 
 export const getJoin = (req, res) => {
   res.render("join", { pageTitle: "Join" });
@@ -32,12 +33,15 @@ export const postJoin = async (req, res) => {
 
 };
 export const getLogin = (req, res) => {
+
+
   res.render("login", { pageTitle: "Log In" });
 };
 
 export const postLogin = async (req, res) => {
   const {
-    body: { email, password }
+    body: { email, password },
+    session
   } = req;
   try {
 
@@ -46,9 +50,9 @@ export const postLogin = async (req, res) => {
     } else {
       const result = await UserModel.findAll({ where: { email: email } });
       if (email == result[0].email && password == result[0].password) {
-
-        req.session.email = email;
-        req.session.password = password;
+        session.email = email;
+        session.password = password;
+        session.auth = 99;
         res.redirect(routes.home);
       } else {
         res.redirect(routes.login);
@@ -63,15 +67,8 @@ export const postLogin = async (req, res) => {
 };
 
 export const logout = (req, res) => {
-  // To Do: Process Log Out
-  req.session.destroy(function (error) {
-    if (error) {
-      console.log(error);
-    } else {
-      res.redirect(routes.home);
-    }
-
-  });
+  req.session.destroy();
+  res.redirect(routes.home);
 };
 
 export const userDetail = (req, res) =>

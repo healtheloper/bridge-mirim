@@ -1,12 +1,59 @@
 import routes from "../routes";
-import { videoModel, questionModel, quizModel } from "../db";
+import { videoModel, questionModel, quizModel, UserModel } from "../db";
 import fs from "fs";
+import session from "express-session";
+
 
 export const home = async (req, res) => {
   try {
+
     const videos = await videoModel.findAll();
     const quizs = await quizModel.findAll();
-    res.render("home", { pageTitle: "Home", videos, quizs });
+
+    if (req.session.auth) {
+
+      const user = await UserModel.findAll({ where: { email: req.session.email } });
+
+      res.render("home", {
+        pageTitle: "Home",
+        videos,
+        quizs,
+        logurl: routes.logout,
+        loglabel: "Log Out",
+        regurl: routes.userDetail(user[0].id),
+        reglabel: req.session.email,
+        quizUpload: "",
+        videoUpload: ""
+      });
+    } else if (req.session.auth && req.session.teacher) {
+
+      const user = await UserModel.findAll({ where: { email: req.session.email } });
+
+      res.render("home", {
+        pageTitle: "Home",
+        videos,
+        quizs,
+        logurl: routes.logout,
+        loglabel: "Log Out",
+        regurl: routes.userDetail(user.id),
+        reglabel: req.session.email,
+        quizUpload: "Quiz upload",
+        videoUpload: "Video Upload"
+      });
+    }
+    else {
+      res.render("home", {
+        pageTitle: "Home",
+        videos,
+        quizs,
+        logurl: routes.login,
+        loglabel: "Log In",
+        regurl: routes.join,
+        reglabel: "Join",
+        quizUpload: "",
+        videoUpload: ""
+      });
+    }
   } catch (error) {
     console.log(error);
     res.render("home", { pageTitle: "Home", videos: [], quizs: [] });
