@@ -2,31 +2,38 @@
 <%- include("./partials/header.ejs") %>
 <div class="video__main">
     <% videos.forEach(function (video, index) { %>
-    <div class="container mt-5">
-        <video class="video__thumbnail" style="width:1000px;" src="/<%= video.fileUrl %>" controls=true>
+    <div class="container mt-5 d-flex p-2">
+        <video class="video__thumbnail block" style="width:300px; margin:0px;" src="/<%= video.fileUrl %>"
+            controls=true>
         </video>
-        <a href=<%= routes.videoDetail(video.id) %>>
-            <div><h5 class="video__title"><%= video.title %></h5></div>
-            <div align="right"><h6 class="video__views">Views : <%= video.views %></h6>
-        </a>
-        <a href=<%= routes.deleteVideo(video.id) %> class="video__delete"> Delete Video </a></div>
-        <hr>
+        <div class="video__content ml-4">
+            <a href=<%= routes.videoDetail(video.id) %> class="d-flex flex-column">
+                <h5 class=" video__title block"><%= video.title %></h5>
+                <h6 class="video__views block"><small>조회수 <%= video.views %> |</small></h6>
+                <h6 class="video__views block"><small><%= video.createdAt %></small></h6>
+                <h6 class="video__views block"><small><%= video.description %></small> </h6>
+            </a>
+            <div>
+                <a href=<%= routes.deleteVideo(video.id) %> class="video__delete"> Delete Video </a>
+            </div>
+        </div>
     </div>
     <% }); %>
-    <% quizs.forEach(function (quiz, index) { %>
-    <div class="quiz__container container mt-5">
-        <a href=<%= routes.editQuiz(quiz.id) %>> Edit Quiz </a>
-        <a href=<%= routes.deleteQuiz(quiz.id) %>> Delete Quiz </a>
-        <h2 class="quiz__title"><%= quiz.question %></h2>
-        <option class="quiz__question btn btn-info" value="1">1. <%= quiz.answerOne %></option>
-        <option class="quiz__question btn btn-info" value="2">2. <%= quiz.answerTwo %></option>
-        <option class="quiz__question btn btn-info" value="3">3. <%= quiz.answerThree %></option>
-        <option class="quiz__question btn btn-info" value="4">4. <%= quiz.answerFour %></option>
-        <div class="quiz__answer" style="display:none"><%= quiz.answerCheck %></div>
-    </div>
-    <% }); %>
+</div>
+<% quizs.forEach(function (quiz, index) { %>
+<div class="quiz__container container mt-5">
+    <a href=<%= routes.editQuiz(quiz.id) %>> Edit Quiz </a>
+    <a href=<%= routes.deleteQuiz(quiz.id) %>> Delete Quiz </a>
+    <h2 class="quiz__title"><%= quiz.question %></h2>
+    <option class="quiz__question btn btn-info" value="1">1. <%= quiz.answerOne %></option>
+    <option class="quiz__question btn btn-info" value="2">2. <%= quiz.answerTwo %></option>
+    <option class="quiz__question btn btn-info" value="3">3. <%= quiz.answerThree %></option>
+    <option class="quiz__question btn btn-info" value="4">4. <%= quiz.answerFour %></option>
+    <div class="quiz__answer" style="display:none"><%= quiz.answerCheck %></div>
+</div>
+<% }); %>
 
-    <div align="center"><button type="button" class="quiz__submit btn btn-danger mt-5">Submit</button></div>
+<div align="center"><button type="button" class="quiz__submit btn btn-danger mt-5">Submit</button></div>
 </div>
 
 <script>
@@ -44,11 +51,13 @@
                 quizQuestion[i].classList.add("btn-primary");
                 answerCount++;
                 selectCount++;
+                quizQuestion[i].disabled = true;
                 alert("정답입니다.");
             } else {
                 quizQuestion[i].classList.remove("btn-info");
                 quizQuestion[i].classList.add("btn-danger");
                 selectCount++;
+                quizQuestion[i].disabled = true;
                 alert("오답입니다.");
             }
             const selectQuizParent = e.target.parentNode;
@@ -66,7 +75,7 @@
                 else
                     return "😀";
             }
-            alert(`${emoji()} 총 ${quizContainer.length} 문제 중 ${answerCount}를 맞추었습니다.`);
+            alert(`${emoji()} 총 ${quizContainer.length} 문제 중 ${answerCount} 문제를 맞추었습니다.`);
         } else {
             alert("문제를 모두 풀지 않았습니다.");
         }

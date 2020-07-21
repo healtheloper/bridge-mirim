@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<%- include("./partials/header.ejs") %>
+<div class="quiz__container container mt-5">
+    <a href=<%= routes.editQuiz(quiz.id) %>> Edit Quiz </a>
+    <a href=<%= routes.deleteQuiz(quiz.id) %>> Delete Quiz </a>
+    <h2 class="quiz__title"><%= quiz.question %></h2>
+    <option class="quiz__question btn btn-info" value="1">1. <%= quiz.answerOne %></option>
+    <option class="quiz__question btn btn-info" value="2">2. <%= quiz.answerTwo %></option>
+    <option class="quiz__question btn btn-info" value="3">3. <%= quiz.answerThree %></option>
+    <option class="quiz__question btn btn-info" value="4">4. <%= quiz.answerFour %></option>
+    <div class="quiz__answer" style="display:none"><%= quiz.answerCheck %></div>
+</div>
+<% }); %>
+
+<div align="center"><button type="button" class="quiz__submit btn btn-danger mt-5">Submit</button></div>
+</div>
+<%- include("./partials/footer.ejs") %>
