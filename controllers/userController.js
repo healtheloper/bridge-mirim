@@ -1,5 +1,5 @@
 import routes from "../routes";
-import { UserModel } from "../db";
+import { User } from "../db";
 import session from "express-session";
 import ejs from "ejs";
 
@@ -17,11 +17,9 @@ export const postJoin = async (req, res) => {
       res.render("join", { pageTitle: "Join" });
     } else {
       // To Do: Register User
-      await UserModel.create({
-        email,
-        password,
-        password2,
-        name
+      const user = await User.create({
+        nick,
+        email
       });
       // To Do: Log user in
       res.redirect(routes.login);

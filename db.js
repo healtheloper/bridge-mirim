@@ -1,5 +1,7 @@
-import { Sequelize, Model, DataTypes, INTEGER } from "sequelize";
+import { Sequelize, INTEGER } from "sequelize";
 import dotenv from "dotenv";
+import passportLocalSequelize from "passport-local-sequelize";
+
 dotenv.config();
 
 const sequelize = new Sequelize('mirimLab', "root", process.env.USER_PASSWORD, {
@@ -61,16 +63,18 @@ export const commentModel = sequelize.define("Comment", {
     comment: Sequelize.STRING
 });
 
-export const userModel = sequelize.define("User", {
-    name: Sequelize.STRING,
+export const User = sequelize.define("User", {
+
+    nick: Sequelize.STRING,
     email: Sequelize.STRING,
     avatarUrl: Sequelize.STRING,
     facebookId: Sequelize.INTEGER,
-    githubId: INTEGER,
-    password: Sequelize.STRING,
-    password2: Sequelize.STRING,
-    name: Sequelize.STRING
+    githubId: INTEGER
 });
+passportLocalSequelize.attachToUser(User, {
+    usernameField: 'email'
+});
+
 
 const handleOpen = () => console.log("✅ Connected to DB");
 const handleError = (error) => console.log(`❌ Error on DB Connection : ${error}`)
