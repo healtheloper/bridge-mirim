@@ -47,16 +47,10 @@ export const postLogin = async (req, res) => {
       const result = await UserModel.findAll({ where: { email: email } });
       if (email == result[0].email && password == result[0].password) {
 
-        console.log("ok")
         req.session.email = email;
         req.session.password = password;
         res.redirect(routes.home);
       } else {
-        console.log("no")
-        console.log(email);
-        console.log(result[0].email);
-        console.log(password);
-        console.log(result[0].password);
         res.redirect(routes.login);
       }
 
