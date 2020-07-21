@@ -74,9 +74,31 @@ export const logout = (req, res) => {
   });
 };
 
-export const userDetail = (req, res) =>
-  res.render("userDetail", { pageTitle: "User Detail" });
-export const editProfile = (req, res) =>
-  res.render("editProfile", { pageTitle: "Edit Profile" });
+export const userDetail = async (req, res) =>{
+  const {
+    params: { id },
+} = req;
+try {
+    const profile = await UserModel.findAll({ where: { id: id } });
+    res.render("editProfile", {pageTitle : `Edit Profile`, profile: profile[0]} );
+   res.redirect(routes.editProfile);
+} catch (error) {
+    res.redirect(routes.home);
+}
+};
+
+export const editProfile = async(req, res) =>{
+const {
+  params:{id},
+  body: {email, password, password2, name },
+} = req;
+try {
+  await UserModel.update({ email, password, password2, name }, { where: { id: id } },);
+  res.redirect(routes.home);
+} catch (error) {
+  console.log(error);
+}
+};
+ 
 export const changePassword = (req, res) =>
   res.render("changePassword", { pageTitle: "Change Password" });
