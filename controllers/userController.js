@@ -34,8 +34,31 @@ export const getLogin=(req,res)=>{
   res.render("login", { pageTitle: "Log In" });
 };
  
-export const postLogin = (req, res) => {
-  res.redirect(routes.home);
+export const postLogin = async(req, res) => {
+  const {
+    body: { email,password}
+  }=req;
+  try{
+    
+    if(email=='' || password==''){
+      res.status(562).end('<meta charset="utf-8">아이디나 암호가 입력되지 않아서 로그인할 수 없습니다.');
+    }else{
+      const result = await UserModel.findAll({where:{email: email}});
+      console.log(result);
+      if(email==result[0].email && password==result[0].password){
+        req.session.email=email;
+        req.session.password=password;
+        res.redirect(routes.home);
+      }else{
+        res.redirect(routes.login);
+          }
+      
+      }
+      
+      }catch(error){
+        console.log(error);
+  }
+
 };
 
 export const logout = (req, res) => {
