@@ -6,7 +6,7 @@
     <div><h5>Name : <%= question.userId %> </h5></div>
     <div align="right"><span>Date : <%= question.createdAt %></span></div>
     <div align="right">
-    <a href=<%= routes.editQuestion(question.id) %>> Edit Question </a>
+    <div><a href=<%= routes.editQuestion(question.id) %>> Edit Question </a></div>
     <a href=<%= routes.deleteQuestion(question.id) %>> Delete Question </a></div>
 </div>
 
@@ -15,15 +15,14 @@
     <span><%= question.description %></span>
 </div>
 
-<div class="form-container">
+<div class="container">
     <form action=<%= routes.uploadComment(question.id) %> method="post">
         <!-- TODO: User Parsing-->
         <img src="#" alt="Avater" width="100px" height="100px">
         <span>Login user</span>
-        <input type="text" placeholder="comment here" name="comment" required=true>
+        <input type="text" placeholder="comment here" name="comment" required=true></div>
         <div align="center"><input type="submit" class="btn btn-primary" value="Upload comment"></div>
     </form>
-</div>
 <hr>
 <% comments.forEach(function (comment, index) { %>
 
