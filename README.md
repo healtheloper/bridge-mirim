@@ -11,12 +11,8 @@ Bridge Summer Semester Project - Mirim Media Lab
 - [x] Log in
 - [x] Join
 
-- [ ] Data Update
-- Avatar Update
-- Name Update
-
-- [ ] Avatar img
-- [ ] Name
+- [x] Avatar img
+- [x] Name
 
 ### Question Board
 - [x] Create post
@@ -45,4 +41,4 @@ Bridge Summer Semester Project - Mirim Media Lab
 - [x] Update
 - [x] Delete
 ## Interface
-- [ ] DONE ????
+- [x] DONE 
