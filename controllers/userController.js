@@ -1,9 +1,10 @@
 import routes from "../routes";
-import { userModel } from "../db";
+import { userModel, videoModel } from "../db";
 import session from "express-session";
-import ejs from "ejs";
 
-export const getJoin = (req, res) => {
+export const getJoin = async (req, res) => {
+  const videos = await videoModel.findAll();
+
   if (req.session.auth) {
     res.render("join", {
       pageTitle: "Join",
@@ -12,7 +13,7 @@ export const getJoin = (req, res) => {
       regurl: routes.userDetail(req.session.userId),
       reglabel: req.session.email,
       quizUpload: "",
-      videoUpload: ""
+      videoUpload: "", videos
     });
   } else if (req.session.auth && req.session.teacher) {
     res.render("join", {
@@ -22,7 +23,7 @@ export const getJoin = (req, res) => {
       regurl: routes.userDetail(req.session.userId),
       reglabel: req.session.email,
       quizUpload: "Quiz upload",
-      videoUpload: "Video Upload"
+      videoUpload: "Video Upload", videos
     });
   } else {
     res.render("join", {
@@ -32,7 +33,7 @@ export const getJoin = (req, res) => {
       regurl: routes.join,
       reglabel: "Join",
       quizUpload: "",
-      videoUpload: ""
+      videoUpload: "", videos
     });
   }
 };
@@ -61,7 +62,8 @@ export const postJoin = async (req, res) => {
   }
 
 };
-export const getLogin = (req, res) => {
+export const getLogin = async (req, res) => {
+  const videos = await videoModel.findAll();
 
   if (req.session.auth) {
     res.render("login", {
@@ -71,7 +73,7 @@ export const getLogin = (req, res) => {
       regurl: routes.userDetail(req.session.userId),
       reglabel: req.session.email,
       quizUpload: "",
-      videoUpload: ""
+      videoUpload: "", videos
     });
   } else if (req.session.auth && req.session.teacher) {
     res.render("login", {
@@ -81,7 +83,7 @@ export const getLogin = (req, res) => {
       regurl: routes.userDetail(req.session.userId),
       reglabel: req.session.email,
       quizUpload: "Quiz upload",
-      videoUpload: "Video Upload"
+      videoUpload: "Video Upload", videos
     });
   } else {
     res.render("login", {
@@ -91,7 +93,7 @@ export const getLogin = (req, res) => {
       regurl: routes.join,
       reglabel: "Join",
       quizUpload: "",
-      videoUpload: ""
+      videoUpload: "", videos
     });
   }
 };

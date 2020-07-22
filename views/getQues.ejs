@@ -17,28 +17,26 @@
     <span><%= question.description %></span>
 </div>
 
-<div class="form-container">
+<div class="container">
     <form action=<%= routes.uploadComment(question.id) %> method="post">
-        <!-- TODO: User Parsing-->
         <img src="#" alt="Avater" width="100px" height="100px">
         <span><%= userName %></span>
         <input type="text" placeholder="comment here" name="comment" required=true>
         <div align="center"><input type="submit" class="btn btn-primary" value="Upload comment"></div>
     </form>
-</div>
-<hr>
-<% comments.forEach(function (comment, index) { %>
+    <hr>
+    <% comments.forEach(function (comment, index) { %>
 
-<img src="#" alt="Avater" width="100px" height="100px">
-<!-- TODO: User Parsing-->
-<span><%= comment.userName %></span>
-<div>
-    <h5><%= comment.comment %></h5>
-</div>
-<div align="right"><span><%= comment.createdAt %></span></div>
-<div align="right">
-    <a href=<%= routes.deleteComment(comment.id) %> class="comment__delete"> Delete Comment </a></div>
-<hr>
-<% }); %>
+    <img src="#" alt="Avater" width="100px" height="100px">
+    <!-- TODO: User Parsing-->
+    <span><%= comment.userName %></span>
+    <div>
+        <h5><%= comment.comment %></h5>
+    </div>
+    <div align="right"><span><%= comment.createdAt %></span></div>
+    <div align="right">
+        <a href=<%= routes.deleteComment(comment.id) %> class="comment__delete"> Delete Comment </a></div>
+    <hr>
+    <% }); %>
 
-<%- include("./partials/footer.ejs") %>
+    <%- include("./partials/footer.ejs") %>

@@ -1,8 +1,11 @@
 import routes from "../routes";
-import { quizModel } from "../db";
+import { quizModel, videoModel } from "../db";
 
-export const getQuizUpload = (req, res) => {
+export const getQuizUpload = async (req, res) => {
     if (req.session.auth) {
+
+        const videos = await videoModel.findAll();
+
         res.render("uploadQuiz", {
             pageTitle: "Upload Quiz",
             logurl: routes.logout,
@@ -10,7 +13,7 @@ export const getQuizUpload = (req, res) => {
             regurl: routes.userDetail(req.session.userId),
             reglabel: req.session.email,
             quizUpload: "",
-            videoUpload: ""
+            videoUpload: "", videos
         });
     } else if (req.session.auth && req.session.teacher) {
         res.render("uploadQuiz", {
@@ -20,7 +23,7 @@ export const getQuizUpload = (req, res) => {
             regurl: routes.userDetail(req.session.userId),
             reglabel: req.session.email,
             quizUpload: "Quiz upload",
-            videoUpload: "Video Upload"
+            videoUpload: "Video Upload", videos
         });
     } else {
         res.render("uploadQuiz", {
@@ -30,7 +33,7 @@ export const getQuizUpload = (req, res) => {
             regurl: routes.join,
             reglabel: "Join",
             quizUpload: "",
-            videoUpload: ""
+            videoUpload: "", videos
         });
     }
 };
@@ -54,6 +57,7 @@ export const getQuizEdit = async (req, res) => {
         params: { id },
     } = req;
     try {
+        const videos = await videoModel.findAll();
         if (req.session.auth) {
             const quiz = await quizModel.findAll({ where: { id: id } });
 
@@ -64,7 +68,7 @@ export const getQuizEdit = async (req, res) => {
                 regurl: routes.userDetail(req.session.userId),
                 reglabel: req.session.email,
                 quizUpload: "",
-                videoUpload: "", quiz: quiz[0]
+                videoUpload: "", quiz: quiz[0], videos
             });
         } else if (req.session.auth && req.session.teacher) {
             res.render("editQuiz", {
@@ -74,7 +78,7 @@ export const getQuizEdit = async (req, res) => {
                 regurl: routes.userDetail(req.session.userId),
                 reglabel: req.session.email,
                 quizUpload: "Quiz upload",
-                videoUpload: "Video Upload", quiz: quiz[0]
+                videoUpload: "Video Upload", quiz: quiz[0], videos
             });
         } else {
             res.render("editQuiz", {
@@ -84,7 +88,7 @@ export const getQuizEdit = async (req, res) => {
                 regurl: routes.join,
                 reglabel: "Join",
                 quizUpload: "",
-                videoUpload: "", quiz: quiz[0]
+                videoUpload: "", quiz: quiz[0], videos
             });
         }
     } catch (error) {

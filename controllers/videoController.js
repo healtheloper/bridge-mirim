@@ -22,7 +22,7 @@ export const home = async (req, res) => {
         regurl: routes.userDetail(req.session.userId),
         reglabel: req.session.email,
         quizUpload: "",
-        videoUpload: ""
+        videoUpload: "", videos
       });
     } else if (req.session.auth && req.session.teacher) {
 
@@ -37,7 +37,7 @@ export const home = async (req, res) => {
         regurl: routes.userDetail(req.session.userId),
         reglabel: req.session.email,
         quizUpload: "Quiz upload",
-        videoUpload: "Video Upload"
+        videoUpload: "Video Upload", videos
       });
     }
     else {
@@ -50,7 +50,7 @@ export const home = async (req, res) => {
         regurl: routes.join,
         reglabel: "Join",
         quizUpload: "",
-        videoUpload: ""
+        videoUpload: "", videos
       });
     }
   } catch (error) {
@@ -67,7 +67,9 @@ export const search = async (req, res) => {
   res.render("search", { pageTitle: "Search", searchingBy, videos });
 };
 
-export const getUpload = (req, res) => {
+export const getUpload = async (req, res) => {
+  const videos = await videoModel.findAll();
+
   if (req.session.auth) {
     res.render("upload", {
       pageTitle: "Upload",
@@ -76,7 +78,7 @@ export const getUpload = (req, res) => {
       regurl: routes.userDetail(req.session.userId),
       reglabel: req.session.email,
       quizUpload: "",
-      videoUpload: ""
+      videoUpload: "", videos
     });
   } else if (req.session.auth && req.session.teacher) {
     res.render("upload", {
@@ -86,7 +88,7 @@ export const getUpload = (req, res) => {
       regurl: routes.userDetail(req.session.userId),
       reglabel: req.session.email,
       quizUpload: "Quiz upload",
-      videoUpload: "Video Upload"
+      videoUpload: "Video Upload", videos
     });
   } else {
     res.render("upload", {
@@ -96,7 +98,7 @@ export const getUpload = (req, res) => {
       regurl: routes.join,
       reglabel: "Join",
       quizUpload: "",
-      videoUpload: ""
+      videoUpload: "", videos
     });
   }
 }
@@ -121,6 +123,7 @@ export const videoDetail = async (req, res) => {
     params: { id },
   } = req;
   try {
+    const videos = await videoModel.findAll();
     const video = await videoModel.findAll({ where: { id: id } });
     const questions = await questionModel.findAll({ where: { videoId: id } });
 
@@ -135,7 +138,7 @@ export const videoDetail = async (req, res) => {
         reglabel: req.session.email,
         userName: user[0].name,
         quizUpload: "",
-        videoUpload: "", video: video[0], questions
+        videoUpload: "", video: video[0], questions, videos
       });
     } else if (req.session.auth && req.session.teacher) {
       const user = await userModel.findAll({ where: { id: req.session.userId } });
@@ -148,7 +151,7 @@ export const videoDetail = async (req, res) => {
         reglabel: req.session.email,
         userName: user[0].name,
         quizUpload: "Quiz upload",
-        videoUpload: "Video Upload", video: video[0], questions
+        videoUpload: "Video Upload", video: video[0], questions, videos
       });
     } else {
       res.render("videoDetail", {
@@ -159,7 +162,7 @@ export const videoDetail = async (req, res) => {
         reglabel: "Join",
         userName: "anonymous",
         quizUpload: "",
-        videoUpload: "", video: video[0], questions
+        videoUpload: "", video: video[0], questions, videos
       });
     }
 
@@ -175,6 +178,7 @@ export const getEditVideo = async (req, res) => {
   } = req;
   try {
     const video = await videoModel.findAll({ where: { id: id } });
+    const videos = await videoModel.findAll();
 
     if (req.session.auth) {
       res.render("editVideo", {
@@ -184,7 +188,7 @@ export const getEditVideo = async (req, res) => {
         regurl: routes.userDetail(req.session.userId),
         reglabel: req.session.email,
         quizUpload: "",
-        videoUpload: "", video: video[0]
+        videoUpload: "", video: video[0], videos
       });
     } else if (req.session.auth && req.session.teacher) {
       res.render("editVideo", {
@@ -194,7 +198,7 @@ export const getEditVideo = async (req, res) => {
         regurl: routes.userDetail(req.session.userId),
         reglabel: req.session.email,
         quizUpload: "Quiz upload",
-        videoUpload: "Video Upload", video: video[0]
+        videoUpload: "Video Upload", video: video[0], videos
       });
     } else {
       res.render("editVideo", {
@@ -204,7 +208,7 @@ export const getEditVideo = async (req, res) => {
         regurl: routes.join,
         reglabel: "Join",
         quizUpload: "",
-        videoUpload: "", video: video[0]
+        videoUpload: "", video: video[0], videos
       });
     }
 
@@ -251,6 +255,7 @@ export const getUploadQuestion = async (req, res) => {
   } = req;
   try {
     const video = await videoModel.findAll({ where: { id: id } });
+    const videos = await videoModel.findAll();
 
     if (req.session.auth) {
       const user = await userModel.findAll({ where: { id: req.session.userId } });
@@ -263,7 +268,7 @@ export const getUploadQuestion = async (req, res) => {
         reglabel: req.session.email,
         userName: user[0].name,
         quizUpload: "",
-        videoUpload: "", video: video[0]
+        videoUpload: "", video: video[0], videos
       });
     } else if (req.session.auth && req.session.teacher) {
       const user = await userModel.findAll({ where: { id: req.session.userId } });
@@ -276,7 +281,7 @@ export const getUploadQuestion = async (req, res) => {
         reglabel: req.session.email,
         userName: user[0].name,
         quizUpload: "Quiz upload",
-        videoUpload: "Video Upload", video: video[0]
+        videoUpload: "Video Upload", video: video[0], videos
       });
     } else {
       res.render("uploadQues", {
@@ -287,7 +292,7 @@ export const getUploadQuestion = async (req, res) => {
         reglabel: "Join",
         userName: "anonymous",
         quizUpload: "",
-        videoUpload: "", video: video[0]
+        videoUpload: "", video: video[0], videos
       });
     }
   } catch (error) {
