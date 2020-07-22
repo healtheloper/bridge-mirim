@@ -2,7 +2,7 @@ import routes from "../routes";
 import { quizModel, videoModel } from "../db";
 
 export const getQuizUpload = async (req, res) => {
-    if (req.session.auth) {
+    if (req.session.auth && req.session.teacher == false) {
 
         const videos = await videoModel.findAll();
 
@@ -12,6 +12,7 @@ export const getQuizUpload = async (req, res) => {
             loglabel: "Log Out",
             regurl: routes.userDetail(req.session.userId),
             reglabel: req.session.email,
+            teacher: req.session.teacher,
             quizUpload: "",
             videoUpload: "", videos
         });
@@ -22,6 +23,7 @@ export const getQuizUpload = async (req, res) => {
             loglabel: "Log Out",
             regurl: routes.userDetail(req.session.userId),
             reglabel: req.session.email,
+            teacher: req.session.teacher,
             quizUpload: "Quiz upload",
             videoUpload: "Video Upload", videos
         });
@@ -32,6 +34,7 @@ export const getQuizUpload = async (req, res) => {
             loglabel: "Log In",
             regurl: routes.join,
             reglabel: "Join",
+            teacher: false,
             quizUpload: "",
             videoUpload: "", videos
         });
@@ -58,7 +61,7 @@ export const getQuizEdit = async (req, res) => {
     } = req;
     try {
         const videos = await videoModel.findAll();
-        if (req.session.auth) {
+        if (req.session.auth && req.session.teacher == false) {
             const quiz = await quizModel.findAll({ where: { id: id } });
 
             res.render("editQuiz", {
@@ -67,6 +70,7 @@ export const getQuizEdit = async (req, res) => {
                 loglabel: "Log Out",
                 regurl: routes.userDetail(req.session.userId),
                 reglabel: req.session.email,
+                teacher: req.session.teacher,
                 quizUpload: "",
                 videoUpload: "", quiz: quiz[0], videos
             });
@@ -77,6 +81,7 @@ export const getQuizEdit = async (req, res) => {
                 loglabel: "Log Out",
                 regurl: routes.userDetail(req.session.userId),
                 reglabel: req.session.email,
+                teacher: req.session.teacher,
                 quizUpload: "Quiz upload",
                 videoUpload: "Video Upload", quiz: quiz[0], videos
             });
@@ -87,6 +92,7 @@ export const getQuizEdit = async (req, res) => {
                 loglabel: "Log In",
                 regurl: routes.join,
                 reglabel: "Join",
+                teacher: false,
                 quizUpload: "",
                 videoUpload: "", quiz: quiz[0], videos
             });

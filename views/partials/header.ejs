@@ -64,16 +64,16 @@
       <div class="sidebar-header">
         <h3>목록</h3>
       </div>
-        <div class="video__main">
-          <% videos.forEach(function (video, index) { %>
-          <div>
-              <div class="video__content ml-4">
-                  <a href=<%= routes.videoDetail(video.id) %> class="d-flex flex-column">
-                  <%= video.title %>
-                  </a>
-              </div>
+      <div class="video__main">
+        <% videos.forEach(function (video, index) { %>
+        <div>
+          <div class="video__content ml-4">
+            <a href=<%= routes.videoDetail(video.id) %> class="d-flex flex-column">
+              <%= video.title %>
+            </a>
           </div>
-          <% }); %>
+        </div>
+        <% }); %>
       </div>
     </nav>
 
@@ -95,7 +95,7 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="nav navbar-nav ml-auto">
-
+                <% if (teacher === true) {%>
                 <li class="nav-item">
                   <a class="nav-link btn m-2 text-info shadow" href="/quiz<%= routes.uploadQuiz %>">
                     <%=quizUpload%>
@@ -106,10 +106,11 @@
                     <%=videoUpload%>
                   </a>
                 </li>
+                <%}%>
                 <li class="nav-item">
                   <a class="nav-link btn m-2 text-info shadow" href=<%= regurl %>>
-                    <%=reglabel%>
-                  </a>
+                <%=reglabel%>
+                </a>
                 </li>
                 <li>
                   <a class="nav-link btn m-2 text-info shadow" href=<%= logurl %>>

@@ -43,6 +43,7 @@ export const questionModel = sequelize.define("Question", {
         type: Sequelize.STRING
     },
     userName: Sequelize.TEXT,
+    userId: Sequelize.TEXT,
     title: {
         type: Sequelize.STRING
     },
@@ -59,6 +60,7 @@ export const commentModel = sequelize.define("Comment", {
     },
     userId: Sequelize.TEXT,
     userName: Sequelize.STRING,
+    userImage: Sequelize.STRING,
     comment: Sequelize.STRING
 });
 
@@ -66,6 +68,7 @@ export const userModel = sequelize.define("User", {
     name: Sequelize.STRING,
     email: Sequelize.STRING,
     avatarUrl: Sequelize.STRING,
+    studentCheck: Sequelize.INTEGER,
     password: Sequelize.STRING,
     password2: Sequelize.STRING,
 });

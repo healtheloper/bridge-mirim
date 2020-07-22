@@ -1,17 +1,19 @@
 import routes from "../routes";
 import { userModel, videoModel } from "../db";
+import fs from "fs";
 import session from "express-session";
 
 export const getJoin = async (req, res) => {
   const videos = await videoModel.findAll();
 
-  if (req.session.auth) {
+  if (req.session.auth && req.session.teacher == false) {
     res.render("join", {
       pageTitle: "Join",
       logurl: routes.logout,
       loglabel: "Log Out",
       regurl: routes.userDetail(req.session.userId),
       reglabel: req.session.email,
+      teacher: req.session.teacher,
       quizUpload: "",
       videoUpload: "", videos
     });
@@ -22,6 +24,7 @@ export const getJoin = async (req, res) => {
       loglabel: "Log Out",
       regurl: routes.userDetail(req.session.userId),
       reglabel: req.session.email,
+      teacher: req.session.teacher,
       quizUpload: "Quiz upload",
       videoUpload: "Video Upload", videos
     });
@@ -32,6 +35,7 @@ export const getJoin = async (req, res) => {
       loglabel: "Log In",
       regurl: routes.join,
       reglabel: "Join",
+      teacher: false,
       quizUpload: "",
       videoUpload: "", videos
     });
@@ -40,7 +44,8 @@ export const getJoin = async (req, res) => {
 
 export const postJoin = async (req, res) => {
   const {
-    body: { email, password, password2, name },
+    body: { email, password, password2, studentCheck, name },
+    file: { path }
   } = req;
   try {
     if (password !== password2) {
@@ -50,7 +55,8 @@ export const postJoin = async (req, res) => {
       await userModel.create({
         email,
         password,
-        password2,
+        studentCheck,
+        avatarUrl: path,
         name
       });
       // To Do: Log user in
@@ -65,13 +71,14 @@ export const postJoin = async (req, res) => {
 export const getLogin = async (req, res) => {
   const videos = await videoModel.findAll();
 
-  if (req.session.auth) {
+  if (req.session.auth && req.session.teacher == false) {
     res.render("login", {
       pageTitle: "Log In",
       logurl: routes.logout,
       loglabel: "Log Out",
       regurl: routes.userDetail(req.session.userId),
       reglabel: req.session.email,
+      teacher: req.session.teacher,
       quizUpload: "",
       videoUpload: "", videos
     });
@@ -82,6 +89,7 @@ export const getLogin = async (req, res) => {
       loglabel: "Log Out",
       regurl: routes.userDetail(req.session.userId),
       reglabel: req.session.email,
+      teacher: req.session.teacher,
       quizUpload: "Quiz upload",
       videoUpload: "Video Upload", videos
     });
@@ -92,6 +100,7 @@ export const getLogin = async (req, res) => {
       loglabel: "Log In",
       regurl: routes.join,
       reglabel: "Join",
+      teacher: false,
       quizUpload: "",
       videoUpload: "", videos
     });
@@ -110,11 +119,22 @@ export const postLogin = async (req, res) => {
     } else {
       const result = await userModel.findAll({ where: { email: email } });
       if (email == result[0].email && password == result[0].password) {
-        session.email = email;
-        session.password = password;
-        session.auth = 99;
-        session.userId = result[0].id;
-        console.log(session);
+        if (result[0].studentCheck == 1) {
+          session.email = email;
+          session.password = password;
+          session.auth = true;
+          session.userId = result[0].id;
+          session.teacher = false;
+          console.log("student ? " + session.teacher + ", 학생으로 로그인");
+        } else {
+          session.email = email;
+          session.password = password;
+          session.auth = true;
+          session.userId = result[0].id;
+          session.teacher = true;
+          console.log("student ? " + session.teacher + ", 강사로 로그인");
+        }
+
         res.redirect(routes.home);
       } else {
         res.redirect(routes.login);

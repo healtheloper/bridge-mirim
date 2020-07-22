@@ -10,7 +10,9 @@
         <video src="/<%= video.fileUrl %>" , style="width:1000px;" controls=true></video>
     </div>
     <div align="right" class="video__info">
+        <% if (teacher === true) {%>
         <div><a href=<%= routes.editVideo(video.id) %> class="btn btn-secondary"> Edit Video</a></div>
+        <%}%>
         <span class="video__views">views : <%= video.views %></span>
     </div>
     <div class="video__detailBox">
@@ -42,7 +44,9 @@
                             <td>
                                 <span class="post__views"><%= question.views %></span></td>
                             <td>
-                                <span class="post__date"><%= question.createdAt %></span></td>
+                                <span
+                                    class="post__date"><%= question.createdAt.toISOString().slice(0,10).replace(/-/g,"");  %></span>
+                            </td>
                         </tr>
             </div>
             <% }); %>

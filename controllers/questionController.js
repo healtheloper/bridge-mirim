@@ -10,8 +10,9 @@ export const getQuestion = async (req, res) => {
         const comments = await commentModel.findAll({ where: { questionId: question[0].id } })
         const videos = await videoModel.findAll();
 
-        if (req.session.auth) {
+        if (req.session.auth && req.session.teacher == false) {
             const user = await userModel.findAll({ where: { id: req.session.userId } });
+            const users = await userModel.findAll();
 
             res.render("getQues", {
                 pageTitle: "Question",
@@ -20,9 +21,14 @@ export const getQuestion = async (req, res) => {
                 regurl: routes.userDetail(req.session.userId),
                 reglabel: req.session.email,
                 userName: user[0].name,
+                userImage: "/" + user[0].avatarUrl,
+                teacher: req.session.teacher,
+                userId: req.session.userId,
+                questionUploaderId: question.userId,
                 quizUpload: "",
                 videoUpload: "", question: question[0], comments, videos
             });
+
         } else if (req.session.auth && req.session.teacher) {
             const user = await userModel.findAll({ where: { id: req.session.userId } });
 
@@ -33,6 +39,10 @@ export const getQuestion = async (req, res) => {
                 regurl: routes.userDetail(req.session.userId),
                 reglabel: req.session.email,
                 userName: user[0].name,
+                userImage: "/" + user[0].avatarUrl,
+                teacher: req.session.teacher,
+                userId: req.session.userId,
+                questionUploaderId: question.userId,
                 quizUpload: "Quiz upload",
                 videoUpload: "Video Upload", question: question[0], comments, videos
             });
@@ -44,6 +54,10 @@ export const getQuestion = async (req, res) => {
                 regurl: routes.join,
                 reglabel: "Join",
                 userName: "anonymous",
+                userImage: "https://lh3.googleusercontent.com/proxy/uxjgxlTUyMZwqviuMkmP8DUckvOEGFco04lylNTc4U4xKeC5HQMiyy7ihDcQ3Dgp2RRj4GXUBlO1JBxF796ETCbnyiFklzjxEvAHY0eaMjOwqqvKfv2mQHb6WkcJwqi6jIzu0ZB1RNa1i0HhAQOLIp-RwUEqWamwID1d",
+                userId: "anonymous",
+                questionUploaderId: question.userId,
+                teacher: false,
                 quizUpload: "",
                 videoUpload: "", question: question[0], comments, videos
             });
@@ -57,6 +71,9 @@ export const getQuestion = async (req, res) => {
             regurl: routes.join,
             reglabel: "Join",
             userName: "anonymous",
+            userId: "anonymous",
+            questionUploaderId: "",
+            teacher: false,
             quizUpload: "",
             videoUpload: "", question: [], comments: [], videos: []
         });
@@ -71,13 +88,15 @@ export const getEditQuestion = async (req, res) => {
         const question = await questionModel.findAll({ where: { id: id } });
         const videos = await videoModel.findAll();
 
-        if (req.session.auth) {
+        if (req.session.auth && req.session.teacher == false) {
             res.render("editQues", {
                 pageTitle: `Edit ${question[0].title}`,
                 logurl: routes.logout,
                 loglabel: "Log Out",
                 regurl: routes.userDetail(req.session.userId),
                 reglabel: req.session.email,
+                teacher: req.session.teacher,
+                userId: req.session.userId,
                 quizUpload: "",
                 videoUpload: "", question: question[0], videos
             });
@@ -88,6 +107,8 @@ export const getEditQuestion = async (req, res) => {
                 loglabel: "Log Out",
                 regurl: routes.userDetail(req.session.userId),
                 reglabel: req.session.email,
+                userId: req.session.userId,
+                teacher: req.session.teacher,
                 quizUpload: "Quiz upload",
                 videoUpload: "Video Upload", question: question[0], videos
             });
@@ -98,6 +119,8 @@ export const getEditQuestion = async (req, res) => {
                 loglabel: "Log In",
                 regurl: routes.join,
                 reglabel: "Join",
+                userId: "anonymous",
+                teacher: false,
                 quizUpload: "",
                 videoUpload: "", question: question[0], videos
             });
@@ -137,11 +160,12 @@ export const uploadComment = async (req, res) => {
     const user = await userModel.findAll({ where: { id: req.session.userId } });
     const {
         params: { id },
-        body: { comment, userId }
+        body: { comment }
     } = req;
     const newComment = await commentModel.create({
         questionId: id,
-        userId,
+        userId: req.session.userId,
+        userImage: user[0].avatarUrl,
         comment,
         userName: user[0].name
     });

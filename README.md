@@ -8,11 +8,9 @@ Bridge Summer Semester Project - Mirim Media Lab
 ## Common
 
 ### User Function
-**when isAuthenticated = false**
-- [ ] Log in
-- [ ] Join
+- [x] Log in
+- [x] Join
 
-**when isAuthenticated = true**
 - [ ] Data Update
 - Avatar Update
 - Name Update

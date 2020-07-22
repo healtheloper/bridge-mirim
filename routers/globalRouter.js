@@ -8,11 +8,12 @@ import {
   getJoin,
   postJoin,
 } from "../controllers/userController";
+import { uploadImage } from "../middlewares";
 
 const globalRouter = express.Router();
 
 globalRouter.get(routes.join, getJoin);
-globalRouter.post(routes.join, postJoin);
+globalRouter.post(routes.join, uploadImage, postJoin);
 
 globalRouter.get(routes.login, getLogin);
 globalRouter.post(routes.login, postLogin);
