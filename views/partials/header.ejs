@@ -64,6 +64,17 @@
       <div class="sidebar-header">
         <h3>목록</h3>
       </div>
+        <div class="video__main">
+          <% videos.forEach(function (video, index) { %>
+          <div>
+              <div class="video__content ml-4">
+                  <a href=<%= routes.videoDetail(video.id) %> class="d-flex flex-column">
+                  <%= video.title %>
+                  </a>
+              </div>
+          </div>
+          <% }); %>
+      </div>
     </nav>
 
     <div id="content">
