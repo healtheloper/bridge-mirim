@@ -6,9 +6,14 @@ export const getQuestion = async (req, res) => {
         params: { id },
     } = req;
     try {
+
         const question = await questionModel.findAll({ where: { id: id } });
         const comments = await commentModel.findAll({ where: { questionId: question[0].id } })
         const videos = await videoModel.findAll();
+
+        let views = question[0].views;
+        views++;
+        await questionModel.update({ views }, { where: { id: id } },);
 
         if (req.session.auth && req.session.teacher == false) {
             const user = await userModel.findAll({ where: { id: req.session.userId } });

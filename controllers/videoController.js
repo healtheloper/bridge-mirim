@@ -7,7 +7,6 @@ export const home = async (req, res) => {
   try {
 
     const videos = await videoModel.findAll();
-    const quizs = await quizModel.findAll();
 
     if (req.session.auth && req.session.teacher == false) {
       console.log("auth");
@@ -17,7 +16,6 @@ export const home = async (req, res) => {
       res.render("home", {
         pageTitle: "Home",
         videos,
-        quizs,
         logurl: routes.logout,
         loglabel: "Log Out",
         regurl: routes.userDetail(req.session.userId),
@@ -34,7 +32,6 @@ export const home = async (req, res) => {
       res.render("home", {
         pageTitle: "Home",
         videos,
-        quizs,
         logurl: routes.logout,
         loglabel: "Log Out",
         regurl: routes.userDetail(req.session.userId),
@@ -49,7 +46,6 @@ export const home = async (req, res) => {
       res.render("home", {
         pageTitle: "Home",
         videos,
-        quizs,
         logurl: routes.login,
         loglabel: "Log In",
         regurl: routes.join,
@@ -135,6 +131,10 @@ export const videoDetail = async (req, res) => {
     const videos = await videoModel.findAll();
     const video = await videoModel.findAll({ where: { id: id } });
     const questions = await questionModel.findAll({ where: { videoId: id } });
+
+    let views = video[0].views;
+    views++;
+    await videoModel.update({ views }, { where: { id: id } },);
 
     if (req.session.auth) {
       const user = await userModel.findAll({ where: { id: req.session.userId } });

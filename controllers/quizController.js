@@ -1,10 +1,50 @@
 import routes from "../routes";
 import { quizModel, videoModel } from "../db";
 
-export const getQuizUpload = async (req, res) => {
-    if (req.session.auth && req.session.teacher == false) {
+export const handleQuiz = async (req, res) => {
+    const videos = await videoModel.findAll();
+    const quizs = await quizModel.findAll();
 
-        const videos = await videoModel.findAll();
+    if (req.session.auth && req.session.teacher) {
+        res.render("quiz", {
+            pageTitle: "Quiz",
+            logurl: routes.logout,
+            loglabel: "Log Out",
+            regurl: routes.userDetail(req.session.userId),
+            reglabel: req.session.email,
+            teacher: req.session.teacher,
+            quizUpload: "Quiz upload",
+            videoUpload: "Video Upload", videos, quizs
+        });
+    } else if (req.session.auth && req.session.teacher == false) {
+        res.render("quiz", {
+            pageTitle: "Quiz",
+            logurl: routes.logout,
+            loglabel: "Log Out",
+            regurl: routes.userDetail(req.session.userId),
+            reglabel: req.session.email,
+            teacher: req.session.teacher,
+            quizUpload: "",
+            videoUpload: "", videos, quizs
+        });
+    } else {
+        res.render("quiz", {
+            pageTitle: "Quiz",
+            logurl: routes.login,
+            loglabel: "Log In",
+            regurl: routes.join,
+            reglabel: "Join",
+            teacher: false,
+            quizUpload: "",
+            videoUpload: "", videos, quizs
+        });
+    }
+}
+
+export const getQuizUpload = async (req, res) => {
+    const videos = await videoModel.findAll();
+
+    if (req.session.auth && req.session.teacher == false) {
 
         res.render("uploadQuiz", {
             pageTitle: "Upload Quiz",
@@ -17,6 +57,7 @@ export const getQuizUpload = async (req, res) => {
             videoUpload: "", videos
         });
     } else if (req.session.auth && req.session.teacher) {
+
         res.render("uploadQuiz", {
             pageTitle: "Upload Quiz",
             logurl: routes.logout,
