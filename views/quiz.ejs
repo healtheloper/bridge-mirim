@@ -8,10 +8,11 @@
         <a href=<%= routes.deleteQuiz(quiz.id) %>> Delete Quiz </a>
         <%}%>
             <h2 class="quiz__title"><%= quiz.question %></h2>
-        <option class="quiz__question btn btn-info" value="1">1. <%= quiz.answerOne %></option>
-        <option class="quiz__question btn btn-info" value="2">2. <%= quiz.answerTwo %></option>
-        <option class="quiz__question btn btn-info" value="3">3. <%= quiz.answerThree %></option>
-        <option class="quiz__question btn btn-info" value="4">4. <%= quiz.answerFour %></option>
+        
+        <option class="quiz__question btn btn-outline-success" value="1">1. <%= quiz.answerOne %></option>
+        <option class="quiz__question btn btn-outline-success" value="2">2. <%= quiz.answerTwo %></option>
+        <option class="quiz__question btn btn-outline-success" value="3">3. <%= quiz.answerThree %></option>
+        <option class="quiz__question btn btn-outline-success" value="4">4. <%= quiz.answerFour %></option>
         <div class="quiz__answer" style="display:none"><%= quiz.answerCheck %></div>
     </div>
     <% }); %>
@@ -30,15 +31,15 @@
             const correctAnswer = e.target.parentNode.querySelector(".quiz__answer").textContent;
             const selectAnswer = e.target.value;
             if (correctAnswer === selectAnswer) {
-                quizQuestion[i].classList.remove("btn-info");
-                quizQuestion[i].classList.add("btn-primary");
+                quizQuestion[i].classList.remove("btn-outline-success");
+                quizQuestion[i].classList.add("btn-success");
                 answerCount++;
                 selectCount++;
                 quizQuestion[i].disabled = true;
                 alert("정답입니다.");
             } else {
-                quizQuestion[i].classList.remove("btn-info");
-                quizQuestion[i].classList.add("btn-danger");
+                quizQuestion[i].classList.remove("btn-success");
+                quizQuestion[i].classList.add("btn-outline-danger");
                 selectCount++;
                 quizQuestion[i].disabled = true;
                 alert("오답입니다.");

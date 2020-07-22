@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <%- include("./partials/header.ejs") %>
 <div class="video__main">
+    
     <% videos.forEach(function (video, index) { %>
-    <div class="container mt-5 d-flex p-2">
+    <div class="mt-5 d-flex p-2">
         <video class="video__thumbnail block" style="width:300px; margin:0px;" src="/<%= video.fileUrl %>"
             controls=true>
         </video>
@@ -22,5 +23,6 @@
     </div>
     <% }); %>
         </div>
-    </div>
+
+
     <%- include("./partials/footer.ejs") %>
