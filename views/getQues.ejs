@@ -9,18 +9,20 @@
     <div align="right"><span>Date : <%= question.createdAt.toISOString().slice(0,10).replace(/-/g,"");  %></span></div>
     <div align="right">
         <% if (teacher === true || userId === questionUploaderId) {%>
-        <div class="btn btn-outline-secondary hover"><a href=<%= routes.editQuestion(question.id) %>> Edit Question </a></div>
-        <div class="btn btn-outline-secondary hover"><a href=<%= routes.deleteQuestion(question.id) %>> Delete Question </a></div>
+        <div class="btn btn-outline-secondary hover"><a href=<%= routes.editQuestion(question.id) %>> Edit Question </a>
+        </div>
+        <div class="btn btn-outline-secondary hover"><a href=<%= routes.deleteQuestion(question.id) %>> Delete Question
+            </a></div>
         <%}%>
     </div>
 </div>
 
 <hr>
-<div class="question__description">
+<div class="question__description mb-5">
     <span><%= question.description %></span>
     </div>
 
-    <div class="container">
+    <div class="container-fluid">
         <form action=<%= routes.uploadComment(question.id) %> method="post">
             <img src=<%= userImage %> alt="Avater" width="50px" height="50px" style="border-radius:20px;">
             <span><%= userName %></span>

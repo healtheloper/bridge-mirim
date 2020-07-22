@@ -136,7 +136,7 @@ export const videoDetail = async (req, res) => {
     views++;
     await videoModel.update({ views }, { where: { id: id } },);
 
-    if (req.session.auth) {
+    if (req.session.auth && req.session.teacher == false) {
       const user = await userModel.findAll({ where: { id: req.session.userId } });
 
       res.render("videoDetail", {

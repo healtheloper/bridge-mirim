@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title><%= siteName %></title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
     integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -21,6 +22,8 @@
     crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
     integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+  <link href="https://vjs.zencdn.net/7.8.3/video-js.css" rel="stylesheet" />
+  <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
 </head>
 
 <body>
@@ -28,31 +31,17 @@
     <nav class="navbar navbar-default" role="navigation">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
-          <span class="sr-only"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        &nbsp;
+
         <div class="btn-group">
           <a href=<%=routes.home %> class="btn btn-default">
-            <span class="hidden-xs">
-              HANKOOKSA
+            <img src="http://g-bridge.kr/data/skin/default/images/da_image/hd_logo.png" height="40px;">
+            <span class="hidden-xs ml-3">
+              Mirim Learning Lab
             </span>
           </a>
         </div>
       </div>
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="navbar-collapse-1">
-        <form action=<%=routes.search %> method="get" class="navbar-form navbar-left" role="search">
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Search">
-          </div>
-        </form>
-        </li>
-        </ul>
-      </div><!-- /.navbar-collapse -->
+
     </nav>
 
 
@@ -60,18 +49,16 @@
   <div class="wrapper">
 
     <!-- Sidebar  -->
-    <nav id="sidebar">
-      <div class="sidebar-header">
-        <h3>목록</h3>
+    <nav id="sidebar" class="active">
+      <div class="sidebar-header shadow d-flex justify-content-center">
+        <h3 class="text-info m-auto">Lecture List</h3>
       </div>
       <div class="video__main">
         <% videos.forEach(function (video, index) { %>
-        <div>
-          <div class="video__content ml-4">
-            <a href=<%= routes.videoDetail(video.id) %> class="d-flex flex-column">
-              <%= video.title %>
-            </a>
-          </div>
+        <div class="video__content ml-4 mt-3 shadow bg-info text-white">
+          <a href=<%= routes.videoDetail(video.id) %> class="d-flex flex-column">
+            <%= video.title %>
+          </a>
         </div>
         <% }); %>
       </div>
