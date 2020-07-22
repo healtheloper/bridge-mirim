@@ -4,6 +4,9 @@
     <form action=<%= routes.editVideo(video.id) %> method="post">
         <input type="text" laceholder="Title" name="title" value=<%= video.title %>>
         <textarea name="description" placeholder="Description"><%= video.description %></textarea>
+        <div class="form-group">
+            <textarea name="note" placeholder="Note" rows="20"><%= video.note %></textarea>
+        </div>
         <div align="center"><input class="btn btn-primary" type="submit" value="Update Video"></div>
     </form>
 </div>

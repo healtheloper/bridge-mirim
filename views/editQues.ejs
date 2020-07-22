@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <%- include("./partials/header.ejs") %>
-<div class="form-container">
+<div class="container">
     <form action=<%= routes.editQuestion(question.id) %> method="post">
         <input type="text" placeholder="Title" name="title" value=<%= question.title %> required=true>
         <textarea name="description" placeholder="Description"><%= question.description %></textarea>

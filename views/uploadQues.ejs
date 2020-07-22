@@ -5,12 +5,12 @@
         <label for="label-control">Title</label>
         <input type="text" placeholder="Title" name="title" required=true>
         <label for="label-control">UserId</label>
-        <input type="text" placeholder="userId" name="userId" required=true>
+        <input type="text" placeholder="userId" name="userId" required=true value=<%= userName%> disabled>
         <label for="label-control">Description</label>
         <textarea name="description" placeholder="Description"></textarea>
-    </div>
-    <div align="center">
-        <button type="submit" class="btn btn-primary" value="Upload Question">upload</button>
-    </div>
-    </form>
+</div>
+<div align="center">
+    <button type="submit" class="btn btn-primary" value="Upload Question">upload</button>
+</div>
+</form>
 <%- include("./partials/footer.ejs") %>

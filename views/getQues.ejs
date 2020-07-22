@@ -2,12 +2,14 @@
 <%- include("./partials/header.ejs") %>
 <div class="question__title">
     <h2>Question : <%= question.title %></h2>
-    
-    <div><h5>Name : <%= question.userId %> </h5></div>
+
+    <div>
+        <h5>Name : <%= question.userName %> </h5>
+    </div>
     <div align="right"><span>Date : <%= question.createdAt %></span></div>
     <div align="right">
-    <a href=<%= routes.editQuestion(question.id) %>> Edit Question </a>
-    <a href=<%= routes.deleteQuestion(question.id) %>> Delete Question </a></div>
+        <a href=<%= routes.editQuestion(question.id) %>> Edit Question </a>
+        <a href=<%= routes.deleteQuestion(question.id) %>> Delete Question </a></div>
 </div>
 
 <hr>
@@ -19,7 +21,7 @@
     <form action=<%= routes.uploadComment(question.id) %> method="post">
         <!-- TODO: User Parsing-->
         <img src="#" alt="Avater" width="100px" height="100px">
-        <span>Login user</span>
+        <span><%= userName %></span>
         <input type="text" placeholder="comment here" name="comment" required=true>
         <div align="center"><input type="submit" class="btn btn-primary" value="Upload comment"></div>
     </form>
@@ -29,11 +31,13 @@
 
 <img src="#" alt="Avater" width="100px" height="100px">
 <!-- TODO: User Parsing-->
-<span>Login user</span>
-<div><h5><%= comment.comment %></h5></div>
+<span><%= comment.userName %></span>
+<div>
+    <h5><%= comment.comment %></h5>
+</div>
 <div align="right"><span><%= comment.createdAt %></span></div>
 <div align="right">
-<a href=<%= routes.deleteComment(comment.id) %> class="comment__delete"> Delete Comment </a></div>
+    <a href=<%= routes.deleteComment(comment.id) %> class="comment__delete"> Delete Comment </a></div>
 <hr>
 <% }); %>
 
