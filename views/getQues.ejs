@@ -9,8 +9,8 @@
     <div align="right"><span>Date : <%= question.createdAt.toISOString().slice(0,10).replace(/-/g,"");  %></span></div>
     <div align="right">
         <% if (teacher === true || userId === questionUploaderId) {%>
-        <a href=<%= routes.editQuestion(question.id) %>> Edit Question </a>
-        <a href=<%= routes.deleteQuestion(question.id) %>> Delete Question </a>
+        <div class="btn btn-outline-secondary hover"><a href=<%= routes.editQuestion(question.id) %>> Edit Question </a></div>
+        <div class="btn btn-outline-secondary hover"><a href=<%= routes.deleteQuestion(question.id) %>> Delete Question </a></div>
         <%}%>
     </div>
 </div>

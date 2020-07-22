@@ -2,16 +2,10 @@
 <%- include("./partials/header.ejs") %>
 <h2>Join </h2>
 <hr>
-<div class="container">
+<div >
   <!-- container class 가 페이지의 컨텐츠영역을 지정 -->
   <div class="jumbotron" style="width:500px; margin:auto">
-
-    <div class="bm-login-form" style='width:400px; margin-left:auto; margin-right:auto; border:1px'>
-
-      <div class="starter-template">
-      </div>
-
-      <form name=join onsubmit="return validate()" method=post action=<%= routes.join %> enctype="multipart/form-data">
+     <form name=join onsubmit="return validate()" method=post action=<%= routes.join %> enctype="multipart/form-data">
         <div class="form-group">
           <label for="exampleInputEmail1">UserId</label>
           <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp"
@@ -41,9 +35,8 @@
 
 
         <hr>
-        <button type="submit" class="btn btn-primary">Join</button>
+        <div align="center"><button type="submit" class="btn btn-primary">Join</button></div>
       </form>
     </div>
-  </div>
 </div><!-- /.container -->
 <%- include("./partials/footer.ejs") %>
