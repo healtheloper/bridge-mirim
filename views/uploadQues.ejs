@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <%- include("./partials/header.ejs") %>
-<div class="container">
+<div align="center">
+<div class="form-container">
     <table class="table table-hover">
     <form action=<%= routes.uploadQuestion(video.id) %> method="post">
        <tr>
@@ -16,6 +17,7 @@
       <td><textarea name="description" placeholder="Description"></textarea></td>
     </tr>
 </table>
+</div>
 </div>
     <div align="center">
         <button type="submit" class="btn btn-primary" value="Upload Question">upload</button></div>

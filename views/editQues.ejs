@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <%- include("./partials/header.ejs") %>
-<div class="container">
+<div align="center">
+<div class="form-container">
     <table class="table table-hover">
     <form action=<%= routes.editQuestion(question.id) %> method="post">
         <tr>
@@ -14,6 +15,7 @@
             </td>
         </tr>   
     </table>
+</div>
 </div>
         <div align="center"><input class="btn btn-primary" type="submit" value="Update Question"></div>
     </form>

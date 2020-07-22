@@ -2,7 +2,8 @@
 <%- include("./partials/header.ejs") %>
 
 <body>
-    <div class="container">
+    <div align="center">
+    <div class="form-container">
         <form action=<%= routes.editQuiz(quiz.id) %> method="post">
             <div class="form-group">
                 <label for="title" class="control-label">Quiz Title</label>
@@ -43,6 +44,7 @@
                     <input type="radio" id="answerCheckFour" name="answerCheck" value="4">Quiz 4
                 </label>
             </div>
+    </div>
             <div align="center">
                 <button type="submit" class="btn btn-primary " value="Upload Quiz">upload</button>
             </div>
