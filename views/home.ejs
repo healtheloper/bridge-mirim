@@ -15,7 +15,7 @@
                 <h6 class="video__views block"><small><%= video.description %></small> </h6>
             </a>
             <% if (teacher === true) {%>
-            <div>
+            <div class="btn btn-secondary">
                 <a href=<%= routes.deleteVideo(video.id) %> class="video__delete"> Delete Video </a>
             </div>
             <%}%>
