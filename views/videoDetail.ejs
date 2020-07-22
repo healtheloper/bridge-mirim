@@ -1,52 +1,58 @@
 <!DOCTYPE html>
 <%- include("./partials/header.ejs") %>
-<h5 class="video__title"><%= video.title %></h5>
-<div align="center" class="video__player">
-    <video src="/<%= video.fileUrl %>" , style="width:1000px;" controls=true></video>
-</div>
-<div align="right" class="video__info">
-    <div><a href=<%= routes.editVideo(video.id) %>> Edit Video</a></div>
-    <span class="video__views">views : <%= video.views %></span>
-</div>
-<div class="video__detailBox">
-    <a class="btn btn-primary text-white video__note">강의노트</a>
-    <a class="btn btn-secondary text-white video__question">질문</a>
-    <hr>
-    <p class="video__description"><%= video.note %></p>
-    <div class="video__questions" style="display:none;">
-        <div class="posts">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>번호</th>
-                        <th>제목</th>
-                        <th>작성자</th>
-                        <th>조회수</th>
-                        <th>날짜</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% questions.forEach(function (question, index) { %>
-                    <tr onClick="location.href='<%= routes.questionDetail(question.id) %>'" style="cursor:pointer;">
+<div class="container shadow">
 
-                        <td><span class="post__id"><%= question.id %></span></td></a>
-                        <td>
-                            <span class="post__title"><%= question.title %></span></td>
-                        <td>
-                            <span class="post__userId"><%= question.userId %></span></td>
-                        <td>
-                            <span class="post__views"><%= question.views %></span></td>
-                        <td>
-                            <span class="post__date"><%= question.createdAt %></span></td>
-                    </tr>
-        </div>
-        <% }); %>
-        </tbody>
-        </table>
+    <button type="button" class="page-back btn btn-primary mb-4" onclick="goBack()">
+        <i class="fas fa-arrow-left mr-2"></i>Back
+    </button>
+    <h5 class="video__title"><%= video.title %></h5>
+    <div align="center" class="video__player">
+        <video src="/<%= video.fileUrl %>" , style="width:1000px;" controls=true></video>
     </div>
-    <div align="right">
-        <a href=<%= routes.uploadQuestion(video.id) %> class="btn btn-default pull right">질문하기</a></div>
+    <div align="right" class="video__info">
+        <div><a href=<%= routes.editVideo(video.id) %> class="btn btn-secondary"> Edit Video</a></div>
+        <span class="video__views">views : <%= video.views %></span>
+    </div>
+    <div class="video__detailBox">
+        <a class="btn btn-primary text-white video__note">강의노트</a>
+        <a class="btn btn-secondary text-white video__question">질문</a>
+        <hr>
+        <p class="video__description"><%= video.note %></p>
+        <div class="video__questions" style="display:none;">
+            <div class="posts">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>번호</th>
+                            <th>제목</th>
+                            <th>작성자</th>
+                            <th>조회수</th>
+                            <th>날짜</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% questions.forEach(function (question, index) { %>
+                        <tr onClick="location.href='<%= routes.questionDetail(question.id) %>'" style="cursor:pointer;">
 
+                            <td><span class="post__id"><%= question.id %></span></td></a>
+                            <td>
+                                <span class="post__title"><%= question.title %></span></td>
+                            <td>
+                                <span class="post__userName"><%= question.userName %></span></td>
+                            <td>
+                                <span class="post__views"><%= question.views %></span></td>
+                            <td>
+                                <span class="post__date"><%= question.createdAt %></span></td>
+                        </tr>
+            </div>
+            <% }); %>
+            </tbody>
+            </table>
+        </div>
+        <div align="right">
+            <a href=<%= routes.uploadQuestion(video.id) %> class="btn btn-secondary pull right">질문하기</a></div>
+
+    </div>
 </div>
 </div>
 <script>
@@ -73,8 +79,15 @@
         description.style.display = "none";
         questions.style.display = "block";
     }
+
     note.addEventListener("click", handleNoteClick);
     question.addEventListener("click", handleQuestionClick);
+
+    function goBack() {
+        window.history.back();
+    }
+
+
 
 </script>
 <%- include("./partials/footer.ejs") %>

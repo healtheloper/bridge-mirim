@@ -3,21 +3,26 @@
 
 <body>
     <div align="center">
-    <div class="form-container">
-        <table class="table table-hover">
-        <form action="/videos<%= routes.upload %>" method="post" enctype="multipart/form-data">
-           <tr>
-            <td>Ttile</td>
-              <td>  <input type="text" class="form-control" placeholder="Title" id="title" name="title" required=true></td>
-              </tr>
-              <tr>
-           <td>Note</td>
-            <td><textarea name="note" placeholder="note"></textarea></td>
-            </tr>
-               <tr>
-                <td>Upload</td>
-               <td> <input type="file"  id="file" name="videoFile" required=ture accept="video/*"></td>
-               </tr>
+        <div class="form-container">
+            <table class="table table-hover">
+                <form action="/videos<%= routes.upload %>" method="post" enctype="multipart/form-data">
+                    <tr>
+                        <td>Ttile</td>
+                        <td> <input type="text" class="form-control" placeholder="Title" id="title" name="title"
+                                required=true></td>
+                    </tr>
+                    <tr>
+                        <td>Description</td>
+                        <td><textarea name="description" placeholder="Description"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>Note</td>
+                        <td><textarea name="note" placeholder="Note" rows="20"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>Upload</td>
+                        <td> <input type="file" id="file" name="videoFile" required=ture accept="video/*"></td>
+                    </tr>
             </table>
         </div>
     </div>

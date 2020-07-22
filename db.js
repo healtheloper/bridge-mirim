@@ -1,4 +1,4 @@
-import { Sequelize, Model, DataTypes } from "sequelize";
+import { Sequelize, Model, DataTypes, INTEGER } from "sequelize";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -42,11 +42,11 @@ export const questionModel = sequelize.define("Question", {
     videoId: {
         type: Sequelize.STRING
     },
-    userId: Sequelize.TEXT,
+    userName: Sequelize.TEXT,
     title: {
         type: Sequelize.STRING
     },
-    description: Sequelize.STRING,
+    description: Sequelize.STRING(2000),
     views: {
         type: Sequelize.INTEGER,
         defaultValue: 0,
@@ -58,14 +58,16 @@ export const commentModel = sequelize.define("Comment", {
         type: Sequelize.STRING
     },
     userId: Sequelize.TEXT,
+    userName: Sequelize.STRING,
     comment: Sequelize.STRING
 });
 
-export const UserModel = sequelize.define("USERS", {
+export const userModel = sequelize.define("User", {
+    name: Sequelize.STRING,
     email: Sequelize.STRING,
+    avatarUrl: Sequelize.STRING,
     password: Sequelize.STRING,
     password2: Sequelize.STRING,
-    name: Sequelize.STRING
 });
 
 const handleOpen = () => console.log("✅ Connected to DB");

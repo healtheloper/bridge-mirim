@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <title><%= pageTitle %> | <%= siteName %></title>
+  <title><%= siteName %></title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
     integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
@@ -84,39 +84,36 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="nav navbar-nav ml-auto">
-                <% if (!user.isAuthenticated) {%>
-                <li class="nav-item active">
-                  <a class="nav-link" href=<%= routes.join %>> Join </a>
+
+                <li class="nav-item">
+                  <a class="nav-link btn m-2 text-info shadow" href="/quiz<%= routes.uploadQuiz %>">
+                    <%=quizUpload%>
+                  </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href=<%= routes.login %>> Log In </a>
-                </li>
-                <%} else {%>
-                <li class="nav-item">
-                  <a class="nav-link btn m-2 text-info shadow" href="/quiz<%= routes.uploadQuiz %>"> Quiz Upload </a>
+                  <a class="nav-link btn m-2 text-info shadow" href="/videos<%= routes.upload %>">
+                    <%=videoUpload%>
+                  </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link btn m-2 text-info shadow" href="/videos<%= routes.upload %>"> Video Upload </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link btn m-2 text-info shadow" href=<%= routes.userDetail(user.id) %>> Profile </a>
+                  <a class="nav-link btn m-2 text-info shadow" href=<%= regurl %>>
+                    <%=reglabel%>
+                  </a>
                 </li>
                 <li>
-                  <a class="nav-link btn m-2 text-info shadow" href=<%= routes.logout %>> Log Out </a>
+                  <a class="nav-link btn m-2 text-info shadow" href=<%= logurl %>>
+                    <%=loglabel%>
+                  </a>
                 </li>
-                <%} %>
               </ul>
             </div>
           </div>
         </nav>
       </div>
-</body>
-<script type="text/javascript">
-  $(document).ready(function () {
-    $('#sidebarCollapse').on('click', function () {
-      $('#sidebar').toggleClass('active');
-    });
-  });
-</script>
-
-</html>
+      <script type="text/javascript">
+        $(document).ready(function () {
+          $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+          });
+        });
+      </script>

@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <%- include("./partials/header.ejs") %>
 <div align="center">
-<div class="form-container">
-    <table class="table table-hover">
-    <form action=<%= routes.editVideo(video.id) %> method="post">
-        <tr>
-            <td>Ttile</td>
-        <td><input type="text" laceholder="Title" name="title" value=<%= video.title %>></td>
-        </tr>
-        <tr>
-        <td>Note</td>
-        <td><textarea name="description" placeholder="Description"><%= video.description %></textarea></td>
-        </tr>
+    <div class="form-container">
+        <table class="table table-hover">
+            <form action=<%= routes.editVideo(video.id) %> method="post">
+                <tr>
+                    <td>Ttile</td>
+                    <td><input type="text" laceholder="Title" name="title" value=<%= video.title %>></td>
+                </tr>
+                <tr>
+                    <td>Description</td>
+                    <td><textarea name="description" placeholder="Description"><%= video.description %></textarea></td>
+                </tr>
+                <tr>
+                    <td>Note</td>
+                    <td><textarea name="note" placeholder="Note" rows="20"><%= video.note %></textarea></td>
+                </tr>
     </div>
-    </div>
+</div>
 </table>
-        <div align="center"><input class="btn btn-primary" type="submit" value="Update Video"></div>
-    </form>
+<div align="center"><input class="btn btn-primary" type="submit" value="Update Video"></div>
+</form>
 
 
 <%- include("./partials/footer.ejs") %>

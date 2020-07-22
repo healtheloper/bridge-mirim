@@ -1,25 +1,28 @@
 <!DOCTYPE html>
 <%- include("./partials/header.ejs") %>
 <div align="center">
-<div class="form-container">
-    <table class="table table-hover">
-    <form action=<%= routes.uploadQuestion(video.id) %> method="post">
-       <tr>
-           <td>Title</td>
-           <td><input type="text" placeholder="Title" name="title" required=true></td>
-        </tr>
-        <tr>
-            <td>UserId</td>
-        <td><input type="text" placeholder="userId" name="userId" required=true></td>
-        </tr>
-        <tr>
-        <td>Description</td>
-      <td><textarea name="description" placeholder="Description"></textarea></td>
-    </tr>
-</table>
+    <div class="form-container">
+        <table class="table table-hover">
+            <form action=<%= routes.uploadQuestion(video.id) %> method="post">
+                <tr>
+                    <td>Title</td>
+                    <td><input type="text" placeholder="Title" name="title" required=true></td>
+                </tr>
+                <tr>
+                    <td>UserId</td>
+                    <td>
+                        <input type="text" placeholder="userId" name="userId" required=true value=<%= userName%>
+                            disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Description</td>
+                    <td><textarea name="description" placeholder="Description"></textarea></td>
+                </tr>
+        </table>
+    </div>
 </div>
-</div>
-    <div align="center">
-        <button type="submit" class="btn btn-primary" value="Upload Question">upload</button></div>
-    </form>
+<div align="center">
+    <button type="submit" class="btn btn-primary" value="Upload Question">upload</button></div>
+</form>
 <%- include("./partials/footer.ejs") %>

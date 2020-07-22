@@ -2,7 +2,37 @@ import routes from "../routes";
 import { quizModel } from "../db";
 
 export const getQuizUpload = (req, res) => {
-    res.render("uploadQuiz", { pageTitle: "Upload Quiz" });
+    if (req.session.auth) {
+        res.render("uploadQuiz", {
+            pageTitle: "Upload Quiz",
+            logurl: routes.logout,
+            loglabel: "Log Out",
+            regurl: routes.userDetail(req.session.userId),
+            reglabel: req.session.email,
+            quizUpload: "",
+            videoUpload: ""
+        });
+    } else if (req.session.auth && req.session.teacher) {
+        res.render("uploadQuiz", {
+            pageTitle: "Upload Quiz",
+            logurl: routes.logout,
+            loglabel: "Log Out",
+            regurl: routes.userDetail(req.session.userId),
+            reglabel: req.session.email,
+            quizUpload: "Quiz upload",
+            videoUpload: "Video Upload"
+        });
+    } else {
+        res.render("uploadQuiz", {
+            pageTitle: "Upload Quiz",
+            logurl: routes.login,
+            loglabel: "Log In",
+            regurl: routes.join,
+            reglabel: "Join",
+            quizUpload: "",
+            videoUpload: ""
+        });
+    }
 };
 export const postQuizUpload = async (req, res) => {
     const {
@@ -24,8 +54,39 @@ export const getQuizEdit = async (req, res) => {
         params: { id },
     } = req;
     try {
-        const quiz = await quizModel.findAll({ where: { id: id } });
-        res.render("editQuiz", { pageTitle: `Edit Quiz`, quiz: quiz[0] });
+        if (req.session.auth) {
+            const quiz = await quizModel.findAll({ where: { id: id } });
+
+            res.render("editQuiz", {
+                pageTitle: `Edit Quiz`,
+                logurl: routes.logout,
+                loglabel: "Log Out",
+                regurl: routes.userDetail(req.session.userId),
+                reglabel: req.session.email,
+                quizUpload: "",
+                videoUpload: "", quiz: quiz[0]
+            });
+        } else if (req.session.auth && req.session.teacher) {
+            res.render("editQuiz", {
+                pageTitle: `Edit Quiz`,
+                logurl: routes.logout,
+                loglabel: "Log Out",
+                regurl: routes.userDetail(req.session.userId),
+                reglabel: req.session.email,
+                quizUpload: "Quiz upload",
+                videoUpload: "Video Upload", quiz: quiz[0]
+            });
+        } else {
+            res.render("editQuiz", {
+                pageTitle: `Edit Quiz`,
+                logurl: routes.login,
+                loglabel: "Log In",
+                regurl: routes.join,
+                reglabel: "Join",
+                quizUpload: "",
+                videoUpload: "", quiz: quiz[0]
+            });
+        }
     } catch (error) {
         res.redirect(routes.home);
     }

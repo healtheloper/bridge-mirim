@@ -1,5 +1,5 @@
 import routes from "../routes";
-import { videoModel, questionModel, commentModel } from "../db";
+import { videoModel, questionModel, commentModel, userModel } from "../db";
 
 export const getQuestion = async (req, res) => {
     const {
@@ -8,10 +8,58 @@ export const getQuestion = async (req, res) => {
     try {
         const question = await questionModel.findAll({ where: { id: id } });
         const comments = await commentModel.findAll({ where: { questionId: question[0].id } })
-        res.render("getQues", { pageTitle: "Question", question: question[0], comments });
+
+
+        if (req.session.auth) {
+            const user = await userModel.findAll({ where: { id: req.session.userId } });
+
+            res.render("getQues", {
+                pageTitle: "Question",
+                logurl: routes.logout,
+                loglabel: "Log Out",
+                regurl: routes.userDetail(req.session.userId),
+                reglabel: req.session.email,
+                userName: user[0].name,
+                quizUpload: "",
+                videoUpload: "", question: question[0], comments
+            });
+        } else if (req.session.auth && req.session.teacher) {
+            const user = await userModel.findAll({ where: { id: req.session.userId } });
+
+            res.render("getQues", {
+                pageTitle: "Question",
+                logurl: routes.logout,
+                loglabel: "Log Out",
+                regurl: routes.userDetail(req.session.userId),
+                reglabel: req.session.email,
+                userName: user[0].name,
+                quizUpload: "Quiz upload",
+                videoUpload: "Video Upload", question: question[0], comments
+            });
+        } else {
+            res.render("getQues", {
+                pageTitle: "Log In",
+                logurl: routes.login,
+                loglabel: "Log In",
+                regurl: routes.join,
+                reglabel: "Join",
+                userName: "anonymous",
+                quizUpload: "",
+                videoUpload: "", question: question[0], comments
+            });
+        }
     } catch (error) {
         console.log(error);
-        res.render("getQues", { pageTitle: "Question", question: [], comments: [] });
+        res.render("getQues", {
+            pageTitle: "Log In",
+            logurl: routes.login,
+            loglabel: "Log In",
+            regurl: routes.join,
+            reglabel: "Join",
+            userName: "anonymous",
+            quizUpload: "",
+            videoUpload: "", question: [], comments: []
+        });
     }
 }
 
@@ -21,7 +69,38 @@ export const getEditQuestion = async (req, res) => {
     } = req;
     try {
         const question = await questionModel.findAll({ where: { id: id } });
-        res.render("editQues", { pageTitle: `Edit ${question[0].title}`, question: question[0] });
+
+        if (req.session.auth) {
+            res.render("editQues", {
+                pageTitle: `Edit ${question[0].title}`,
+                logurl: routes.logout,
+                loglabel: "Log Out",
+                regurl: routes.userDetail(req.session.userId),
+                reglabel: req.session.email,
+                quizUpload: "",
+                videoUpload: "", question: question[0]
+            });
+        } else if (req.session.auth && req.session.teacher) {
+            res.render("editQues", {
+                pageTitle: `Edit ${question[0].title}`,
+                logurl: routes.logout,
+                loglabel: "Log Out",
+                regurl: routes.userDetail(req.session.userId),
+                reglabel: req.session.email,
+                quizUpload: "Quiz upload",
+                videoUpload: "Video Upload", question: question[0]
+            });
+        } else {
+            res.render("editQues", {
+                pageTitle: `Edit ${question[0].title}`,
+                logurl: routes.login,
+                loglabel: "Log In",
+                regurl: routes.join,
+                reglabel: "Join",
+                quizUpload: "",
+                videoUpload: "", question: question[0]
+            });
+        }
     } catch (error) {
         res.redirect(routes.home);
     }
@@ -54,6 +133,7 @@ export const deleteQuestion = async (req, res) => {
 };
 
 export const uploadComment = async (req, res) => {
+    const user = await userModel.findAll({ where: { id: req.session.userId } });
     const {
         params: { id },
         body: { comment, userId }
@@ -61,7 +141,8 @@ export const uploadComment = async (req, res) => {
     const newComment = await commentModel.create({
         questionId: id,
         userId,
-        comment
+        comment,
+        userName: user[0].name
     });
     res.redirect(routes.questionDetail(newComment.questionId));
 };
