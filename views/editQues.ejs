@@ -1,10 +1,21 @@
 <!DOCTYPE html>
 <%- include("./partials/header.ejs") %>
-<div class="form-container">
+<div class="container">
+    <table class="table table-hover">
     <form action=<%= routes.editQuestion(question.id) %> method="post">
-        <input type="text" placeholder="Title" name="title" value=<%= question.title %> required=true>
-        <textarea name="description" placeholder="Description"><%= question.description %></textarea>
+        <tr>
+            <td>Title</td>
+        <td><input type="text" placeholder="Title" name="title" value=<%= question.title %> required=true></td>
+        </tr>
+        <tr>
+            <td>Description</td>
+            <td>
+                <textarea name="description" placeholder="Description"><%= question.description %></textarea>
+            </td>
+        </tr>   
+    </table>
+</div>
         <div align="center"><input class="btn btn-primary" type="submit" value="Update Question"></div>
     </form>
-</div>
+
 <%- include("./partials/footer.ejs") %>
