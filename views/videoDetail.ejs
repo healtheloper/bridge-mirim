@@ -5,14 +5,15 @@
     <button type="button" class="page-back btn btn-primary mb-4" onclick="goBack()">
         <i class="fas fa-arrow-left mr-2"></i>Back
     </button>
-    <h5 class="video__title"><%= video.title %></h5>
+
     <div align="center" class="video__player">
-        <video src="/<%= video.fileUrl %>" , style="width:1000px;" controls=true></video>
+        <video src="/<%= video.fileUrl %>" style="width:1000px;" controls=true></video>
     </div>
     <div align="right" class="video__info">
         <% if (teacher === true) {%>
         <div><a href=<%= routes.editVideo(video.id) %> class="btn btn-secondary"> Edit Video</a></div>
         <%}%>
+        <h5 class="video__title"><%= video.title %></h5>
         <span class="video__views">views : <%= video.views %></span>
     </div>
     <div class="video__detailBox">

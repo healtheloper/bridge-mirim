@@ -56,19 +56,34 @@ a:focus {
 
 #sidebar {
     min-width: 250px;
-    max-width: 250px;
-    background: #7386D5;
-    color: #fff;
+    width: 500px;
+    background: #F8F9FA;
     transition: all 0.3s;
 }
 
+#sidebar .video__content:nth-child(2n-1){
+    margin:0px;
+    margin-bottom:10px;
+    width: 80%;
+    padding:10px 30px;
+    border-radius: 10px;
+}
+#sidebar .video__content:nth-child(2n){
+    margin:0px;
+    margin-bottom:10px;
+    width: 80%;
+    padding:10px 30px;
+    border-radius: 10px;
+}
+
 #sidebar.active {
-    margin-left: -250px;
+    margin-left: -500px;
 }
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #6d7fcc;
+    background: #fff;
+    border-radius: 5px;
 }
 
 #sidebar ul.components {
