@@ -1,6 +1,7 @@
 # Bridge - Mirim
 
 Bridge Summer Semester Project - Mirim Media Lab 
+https://healtheloper.github.io/bridge-mirim/
 
 [@healtheloper](https://github.com/healtheloper) Park Sang Jin
 [@jang-huiju](https://github.com/jang-huiju) Jang Hee Joo
