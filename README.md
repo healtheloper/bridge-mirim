@@ -6,6 +6,7 @@ Bridge Summer Semester Project - Mirim Media Lab
 [@jang-huiju](https://github.com/jang-huiju) Jang Hee Joo
 
 - express
+- GCP
 - MySQL
 - Sequelize
 - ejs
