@@ -5,6 +5,12 @@ Bridge Summer Semester Project - Mirim Media Lab
 [@healtheloper](https://github.com/healtheloper) Park Sang Jin
 [@jang-huiju](https://github.com/jang-huiju) Jang Hee Joo
 
+- express
+- MySQL
+- Sequelize
+- ejs
+- css
+
 ## Common
 
 ### User Function
